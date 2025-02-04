@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="template :: html_head">
+</head>
+
+<body>
+<div class="container" style="max-width: 1200px; margin: 0 auto;">
+
+	<!-- Topbar Start -->
+	<div th:replace="template :: header"></div>
+	<!-- Navbar Start -->
+
+	<div th:replace="template :: menu"></div>
+	<!-- Navbar End -->
+
+
+
+
+<div class="container-fluid pt-5">
+    <h2 class="section-title position-relative text-uppercase mx-xl-5 mb-4">
+        <span class="bg-secondary px-3 py-1 text-black" id="encaCategoria" th:text="${resultado}"></span>
+    </h2>
+    <div class="row px-xl-5 pb-3">
+        <div th:each="cat : ${categorias}" class="col-lg-4 col-md-6 col-sm-12 mb-4">
+            <div class="card category-card shadow-sm border-0">
+                <a th:onclick="linkEnvioProductosPorCategoria('products', '[(${cat.id_categoria_producto})]', '[(${cat.categoria})]')"
+                   class="text-decoration-none">
+                    <div class="card-img-top overflow-hidden position-relative">
+                        <img th:src="@{${'img/' + cat.descripcion}}" class="img-fluid category-image" alt="">
+                        <div class="category-overlay d-flex align-items-center justify-content-center">
+                            <h5 class="text-white m-0" th:text="${cat.categoria}"></h5>
+                        </div>
+                    </div>
+                    <div class="card-body text-center">
+                        <h6 class="card-title mb-1 text-dark" th:text="${cat.categoria}"></h6>
+                       <!-- <small class="text-muted" th:text="'Productos: ' + ${cat.totalProductos}"></small> --> <small class="text-muted" text="'Productos: 12000"></small>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+
+
+ <div th:replace="template :: footerTemplate"></div>
+   		<div th:replace="template :: loadingTemplate"></div>
+   		<div th:replace="template :: loginTemplate"></div>
+   		
+
+
+    <!-- Back to Top -->
+    <a href="#" class="btn btn-primary back-to-top"><i class="fa fa-angle-double-up"></i></a>
+
+<div th:replace="template :: javaScriptTemplate"></div>
+
+
+</body>
+
+</html>

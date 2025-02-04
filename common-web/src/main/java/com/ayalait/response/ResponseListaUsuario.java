@@ -1,0 +1,64 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.ayalait.response;
+
+import java.util.List;
+
+import com.ayalait.modelo.User;
+import com.ayalait.utils.ErrorState;
+
+
+public class ResponseListaUsuario {
+
+	 private boolean status;
+	    private int code;
+	    private List<User> user;
+	    private String resultado;
+	    private ErrorState error;
+	    public boolean isStatus() {
+	        return status;
+	    }
+
+	    public void setStatus(boolean status) {
+	        this.status = status;
+	    }
+
+	    public int getCode() {
+	        return code;
+	    }
+
+	    public void setCode(int code) {
+	        this.code = code;
+	    }
+
+	   
+		public String getResultado() {
+			return resultado;
+		}
+
+		public void setResultado(String resultado) {
+			this.resultado = resultado;
+		}
+
+		public ErrorState getError() {
+			return error;
+		}
+
+		public void setError(ErrorState error) {
+			this.error = error;
+		}
+
+		public List<User> getUser() {
+			return user;
+		}
+
+		public void setUser(List<User> user) {
+			this.user = user;
+		}
+
+	   
+	   
+}

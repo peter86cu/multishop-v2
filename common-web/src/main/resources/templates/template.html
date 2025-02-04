@@ -1,0 +1,1509 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head th:fragment="html_head">
+<meta charset="utf-8">
+<title>MultiShop</title>
+
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<meta content="Free HTML Templates" name="keywords">
+<meta content="Free HTML Templates" name="description">
+
+<!-- Favicon -->
+<link href="img/multi-shop-V1.ico" rel="icon">
+
+<!-- Google Web Fonts -->
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link
+	href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
+	rel="stylesheet">
+
+<!-- Font Awesome -->
+<link
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css"
+	rel="stylesheet">
+
+<!-- Libraries Stylesheet -->
+
+<link href="lib/owlcarousel/assets/owl.carousel.min.css"
+	rel="stylesheet">
+
+<!-- Customized Bootstrap Stylesheet -->
+<link href="css/style.css" rel="stylesheet">
+<link href="css/style-new.css" rel="stylesheet">
+
+<!-- JavaScript Libraries -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<!-- Para generar  codigo UUID Javascript -->
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/node-uuid/1.4.7/uuid.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script type="text/javascript" src="js/funciones.js"></script>
+<script type="text/javascript" src="js/index.js"></script>
+<script type="text/javascript" src="js/login.js"></script>
+
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/node-uuid/1.4.7/uuid.min.js"></script>
+
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+
+
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+
+
+
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.min.css" />
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.2/js/select2.min.js"></script>
+<link
+	href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css"
+	rel="stylesheet" />
+
+
+
+<!-- Tu archivo CSS personalizado -->
+<link href="css/style.css" rel="stylesheet">
+<link href="css/style-new.css" rel="stylesheet">
+
+</head>
+<script>
+	
+</script>
+
+<body>
+
+
+
+	<!-- Header renovado -->
+	<header class="header bg-light shadow-sm py-3">
+		<div class="container-fluid">
+			<div class="row align-items-center">
+				<!-- Logo -->
+				<div
+					class="row align-items-center bg-light py-3 px-xl-5 d-none d-lg-flex">
+					<div class="col-lg-4">
+						<a href="" class="text-decoration-none"> <span
+							class="h1 text-uppercase text-primary bg-dark px-2">Multi</span>
+							<span class="h1 text-uppercase text-dark bg-primary px-2 ml-n1">Shop</span>
+						</a>
+					</div>
+
+					<!-- Barra de búsqueda -->
+					<div class="col-lg-8 col-md-7 col-12">
+						<form class="d-flex">
+							<input type="text" class="form-control"
+								placeholder="Busca productos, marcas y más...">
+							<button type="submit" class="btn btn-primary ms-2">
+								<i class="fa fa-search"></i>
+							</button>
+						</form>
+					</div>
+				</div>
+			</div>
+	</header>
+
+
+
+
+
+
+
+	<!-- Navbar Start -->
+	<div th:fragment="menu">
+		<div id="menu" class="container-fluid bg-dark sticky-top">
+			<div class="row px-xl-5">
+				<!-- Categorías desplegables (izquierda) -->
+				<div class="col-lg-3 d-none d-lg-block">
+					<a
+						class="btn d-flex align-items-center justify-content-between bg-primary w-100"
+						data-bs-toggle="collapse" href="#navbar-vertical"
+						style="height: 65px; padding: 0 30px;">
+						<h6 class="text-dark m-0">
+							<i class="fa fa-bars me-2"></i>Categorías
+						</h6> <i class="fa fa-angle-down text-dark"></i>
+					</a>
+					<nav
+						class="collapse position-absolute navbar navbar-vertical navbar-light align-items-start p-0 bg-light"
+						id="navbar-vertical"
+						style="width: calc(100% - 30px); z-index: 999;">
+						<div th:each="tCateg : ${todaCategoria}" class="navbar-nav w-100">
+							<a
+								th:onclick="linkEnvioProductosPorCategoria('products', '[(${tCateg.id_categoria_producto})]')"
+								class="nav-item nav-link" th:text="${tCateg.categoria}"></a>
+						</div>
+					</nav>
+				</div>
+
+				<!-- Navegación principal (derecha) -->
+				<div class="col-lg-9">
+					<nav
+						class="navbar navbar-expand-lg bg-dark navbar-dark py-3 py-lg-0 px-0">
+						<button type="button" class="navbar-toggler"
+							data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+							<span class="navbar-toggler-icon"></span>
+						</button>
+						<div class="collapse navbar-collapse justify-content-between"
+							id="navbarCollapse">
+							<!-- Links principales -->
+							<ul class="navbar-nav">
+								<li class="nav-item"><a href="index"
+									class="nav-link active">Inicio</a></li>
+								<li class="nav-item dropdown"><a href="#"
+									class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Productos</a>
+									<ul class="dropdown-menu bg-dark border-0">
+										<li th:each="tProd : ${tipoProducto}"><a
+											class="dropdown-item text-white"
+											th:onclick="linkEnvioCateg('category', '[(${tProd.id_tipo_producto})]', '[(${tProd.descripcion})]')"
+											th:text="${tProd.descripcion}"></a></li>
+									</ul></li>
+								<li class="nav-item"><a href="ofertas" class="nav-link">Ofertas</a></li>
+								<li class="nav-item"><a href="contact.html"
+									class="nav-link">Contacto</a></li>
+							</ul>
+
+							<!-- Acciones rápidas -->
+							<div class="d-flex align-items-center">
+								<a href="#" class="btn btn-outline-light me-2"> <i
+									class="fas fa-heart"> </i> <span class="badge bg-danger">
+										0</span>
+								</a> <a href="#" class="btn btn-outline-light me-2"
+									onclick="toggleCarritoDesplegable()"> <i id="carritoIcon"
+									class="fas fa-shopping-cart"></i> <span id="contadorCarrito"
+									class="badge bg-danger">0</span>
+								</a>
+								<div class="navbar-nav ml-auto py-0 d-none d-lg-block">
+
+									<div id="carritoDropdown" class="carrito-desplegable">
+										<div class="carrito-header">
+											<span>Tu Carrito</span>
+											<button type="button" class="close-btn"
+												onclick="toggleCarritoDesplegable()">&times;</button>
+										</div>
+										<table class="table">
+											<thead>
+												<tr>
+													<th>Producto</th>
+													<th>Cantidad</th>
+													<th>Precio</th>
+												</tr>
+											</thead>
+											<tbody id="carritoBody">
+												<!-- Productos se insertarán dinámicamente -->
+											</tbody>
+										</table>
+										<div class="text-end">
+											Total: $<span id="carritoTotal">0.00</span>
+										</div>
+										<div class="carrito-footer">
+											<button class="btn btn-danger btn-lg"
+												onclick="eliminarCarrito()">
+												<i class="fas fa-trash-alt"></i>
+											</button>
+											<button class="btn btn-primary"
+												onclick="validarPago('checkout01')">Pagar</button>
+											<button class="btn btn-secondary"
+												onclick="linkEnvioCardProductos('cart')">Ver
+												Carrito</button>
+										</div>
+									</div>
+
+								</div>
+
+
+							<div th:if="${user.name} == 'Invitado'" class="dropdown">
+    <a class="btn btn-warning dropdown-toggle" href="#" id="loginDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <i class="fa-solid fa-user"></i> MI CUENTA
+    </a>
+    <ul class="dropdown-menu dropdown-menu-end p-3" aria-labelledby="loginDropdown" style="min-width: 300px;" onclick="event.stopPropagation()">
+        <form id="loginForm" onsubmit="return false;">
+            <div class="mb-3">
+                <label for="emailInput" class="form-label"><b>Correo Electrónico</b></label>
+                <input type="email" class="form-control" id="emailInput" placeholder="Ingrese su correo" required>
+            </div>
+            <div class="mb-3">
+                <label for="passwordInput" class="form-label"><b>Contraseña</b></label>
+                <input type="password" class="form-control" id="passwordInput" placeholder="Ingrese su contraseña" required>
+            </div>
+            <button type="button" id="btnIngresar" class="btn btn-danger w-100" onclick="login()">Ingresar</button>
+            <div class="text-center mt-3">
+                <small>Si aún no tenés usuario, <a href="/crear-cuenta" class="text-danger">registrate aquí</a>.</small>
+            </div>
+        </form>
+    </ul>
+</div>
+
+
+								<div th:if="${user.name} != 'Invitado'" class="dropdown">
+									<a class="btn btn-warning dropdown-toggle" href="#"
+										role="button" data-bs-toggle="dropdown" aria-expanded="false">
+										<i class="fa-solid fa-user"></i> <span th:text="${user.name}"></span>
+									</a>
+									<ul class="dropdown-menu bg-dark border-0">
+										<li><a href="my-account" class="dropdown-item text-white">Mi
+												cuenta</a></li>
+										<li><a href="#"
+											th:onclick="linkListadoComprasUser('shopping', '[(${user.id})]')"
+											class="dropdown-item text-white">Mis compras</a></li>
+										<li><a href="address" class="dropdown-item text-white">Mis
+												direcciones</a></li>
+										<li><a href="javascript:;" onclick="salir()"
+											class="dropdown-item text-white">Salir</a></li>
+									</ul>
+								</div>
+
+
+
+
+							</div>
+						</div>
+					</nav>
+				</div>
+			</div>
+		</div>
+		<input type="hidden" th:id="sessionId" name="sessionId"
+			th:value="${sessionId}"> <input type="hidden" id="userId"
+			name="userId" th:value="${user.id}"> <input type="hidden"
+			id="userName" name="userName" th:value="${user.name}"> <input
+			type="hidden" id="cardId" name="cardId" th:value="${cardId}">
+		<input type="hidden" id="cardItems" name="cardItems"
+			th:value="${carrito}">
+	</div>
+
+
+	<!-- Navbar End -->
+
+
+
+	<!--Modal para login-->
+
+	<!-- Modal Login -->
+	<div class="modal fade" id="loginAutenticar" data-backdrop="static"
+		data-keyboard="false" tabindex="-1" aria-labelledby="loginModalLabel"
+		aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="loginModalLabel">Iniciar Sesión</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal"
+						aria-label="Close"></button>
+				</div>
+
+				<!-- Modal body -->
+				<div class="modal-body">
+					<form id="loginForm">
+						<input type="hidden" name="_frm" value="frmLogin">
+
+						<!-- Correo electrónico -->
+						<div class="mb-3">
+							<label for="txtEmail" class="form-label"><b>Correo
+									electrónico</b></label> <input type="email" class="form-control"
+								id="txtEmail" placeholder="Ingrese su correo" autocomplete="off"
+								required>
+						</div>
+
+						<!-- Contraseña -->
+						<div class="mb-3">
+							<label for="txtPassword" class="form-label"><b>Contraseña</b></label>
+							<input type="password" class="form-control" id="txtPassword"
+								placeholder="Ingrese su contraseña" autocomplete="off" required>
+						</div>
+
+						<!-- Recordarme -->
+						<div class="form-check mb-3">
+							<input class="form-check-input" type="checkbox"
+								id="chxRecordarme" checked> <label
+								class="form-check-label" for="chxRecordarme"> Recordarme
+								en este equipo </label>
+						</div>
+
+						<!-- Botón Ingresar -->
+						<div class="d-grid">
+							<button id="btnIngresar" class="btn btn-warning btn-block"
+								type="button" onclick="login()">INGRESAR</button>
+
+						</div>
+
+						<!-- Opciones adicionales -->
+						<div class="text-center mt-3">
+							<a href="/recuperar-contrasena" class="link-secondary">Olvidé
+								mi contraseña</a>
+							<div class="mt-2">
+								No soy usuario registrado y quiero <a href="/crear-cuenta"
+									class="link-primary">crear una cuenta</a>.
+							</div>
+						</div>
+
+						<!-- Opciones de ingreso -->
+						<div class="mt-4 text-center">
+							<button type="button" class="btn btn-outline-danger w-100 mb-2">
+								<i class="bi bi-google"></i> Ingresar con Google
+							</button>
+							<button type="button" class="btn btn-outline-secondary w-100"
+								onclick="usuarios.showPPObtenerPIN()">Ingresar sin
+								contraseña</button>
+						</div>
+					</form>
+				</div>
+
+				<!-- Modal footer -->
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"
+						data-bs-dismiss="modal">Cerrar</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--End-->
+
+	<!-- Carousel Start -->
+	<div class="container-fluid mb-3">
+		<div class="row px-xl-5">
+			<div class="col-lg-8">
+				<div id="header-carousel"
+					class="carousel slide carousel-fade mb-30 mb-lg-0"
+					data-bs-ride="carousel">
+					<div class="carousel-indicators">
+						<button type="button" data-bs-target="#header-carousel"
+							data-bs-slide-to="0" class="active" aria-current="true"
+							aria-label="Slide 1"></button>
+						<button type="button" data-bs-target="#header-carousel"
+							data-bs-slide-to="1" aria-label="Slide 2"></button>
+						<button type="button" data-bs-target="#header-carousel"
+							data-bs-slide-to="2" aria-label="Slide 3"></button>
+					</div>
+					<div class="carousel-inner">
+						<div class="carousel-item active" style="height: 430px;">
+							<img src="img/carousel-1.jpg" class="d-block w-100 h-100"
+								style="object-fit: cover;">
+							<div
+								class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+								<div class="p-3" style="max-width: 700px;">
+									<h1
+										class="display-4 text-white mb-3 animate__animated animate__fadeInDown">Men
+										Fashion</h1>
+									<p class="mx-md-5 px-5 animate__animated animate__bounceIn">Lorem
+										rebum magna amet lorem magna erat diam stet. Sadips duo stet
+										amet amet ndiam elitr ipsum diam</p>
+									<a
+										class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp"
+										href="#">Shop Now</a>
+								</div>
+							</div>
+						</div>
+						<div class="carousel-item" style="height: 430px;">
+							<img src="img/carousel-2.jpg" class="d-block w-100 h-100"
+								style="object-fit: cover;">
+							<div
+								class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+								<div class="p-3" style="max-width: 700px;">
+									<h1
+										class="display-4 text-white mb-3 animate__animated animate__fadeInDown">Women
+										Fashion</h1>
+									<p class="mx-md-5 px-5 animate__animated animate__bounceIn">Lorem
+										rebum magna amet lorem magna erat diam stet. Sadips duo stet
+										amet amet ndiam elitr ipsum diam</p>
+									<a
+										class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp"
+										href="#">Shop Now</a>
+								</div>
+							</div>
+						</div>
+						<div class="carousel-item" style="height: 430px;">
+							<img src="img/carousel-3.jpg" class="d-block w-100 h-100"
+								style="object-fit: cover;">
+							<div
+								class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+								<div class="p-3" style="max-width: 700px;">
+									<h1
+										class="display-4 text-white mb-3 animate__animated animate__fadeInDown">Kids
+										Fashion</h1>
+									<p class="mx-md-5 px-5 animate__animated animate__bounceIn">Lorem
+										rebum magna amet lorem magna erat diam stet. Sadips duo stet
+										amet amet ndiam elitr ipsum diam</p>
+									<a
+										class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp"
+										href="#">Shop Now</a>
+								</div>
+							</div>
+						</div>
+					</div>
+					<button class="carousel-control-prev" type="button"
+						data-bs-target="#header-carousel" data-bs-slide="prev">
+						<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+						<span class="visually-hidden">Previous</span>
+					</button>
+					<button class="carousel-control-next" type="button"
+						data-bs-target="#header-carousel" data-bs-slide="next">
+						<span class="carousel-control-next-icon" aria-hidden="true"></span>
+						<span class="visually-hidden">Next</span>
+					</button>
+				</div>
+			</div>
+			<div class="col-lg-4">
+				<div class="product-offer mb-30" style="height: 200px;">
+					<img class="img-fluid" src="img/offer-1.jpg" alt="">
+					<div class="offer-text">
+						<h6 class="text-white text-uppercase">Save 20%</h6>
+						<h3 class="text-white mb-3">Special Offer</h3>
+						<a href="" class="btn btn-primary">Shop Now</a>
+					</div>
+				</div>
+				<div class="product-offer mb-30" style="height: 200px;">
+					<img class="img-fluid" src="img/offer-2.jpg" alt="">
+					<div class="offer-text">
+						<h6 class="text-white text-uppercase">Save 20%</h6>
+						<h3 class="text-white mb-3">Special Offer</h3>
+						<a href="" class="btn btn-primary">Shop Now</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Carousel End -->
+
+
+	<!-- Featured Start -->
+	<div class="container-fluid pt-5">
+		<div class="row px-xl-5 pb-3">
+			<div class="col-lg-3 col-md-6 col-sm-12 pb-1">
+				<div class="d-flex align-items-center bg-light mb-4"
+					style="padding: 30px;">
+					<h1 class="fa fa-check text-primary m-0 mr-3"></h1>
+					<h5 class="font-weight-semi-bold m-0">Quality Product</h5>
+				</div>
+			</div>
+			<div class="col-lg-3 col-md-6 col-sm-12 pb-1">
+				<div class="d-flex align-items-center bg-light mb-4"
+					style="padding: 30px;">
+					<h1 class="fa fa-shipping-fast text-primary m-0 mr-2"></h1>
+					<h5 class="font-weight-semi-bold m-0">Free Shipping</h5>
+				</div>
+			</div>
+			<div class="col-lg-3 col-md-6 col-sm-12 pb-1">
+				<div class="d-flex align-items-center bg-light mb-4"
+					style="padding: 30px;">
+					<h1 class="fas fa-exchange-alt text-primary m-0 mr-3"></h1>
+					<h5 class="font-weight-semi-bold m-0">14-Day Return</h5>
+				</div>
+			</div>
+			<div class="col-lg-3 col-md-6 col-sm-12 pb-1">
+				<div class="d-flex align-items-center bg-light mb-4"
+					style="padding: 30px;">
+					<h1 class="fa fa-phone-volume text-primary m-0 mr-3"></h1>
+					<h5 class="font-weight-semi-bold m-0">24/7 Support</h5>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Featured End -->
+
+
+	<!-- Categories Start -->
+	<div class="container-fluid pt-5">
+		<h2
+			class="section-title position-relative text-uppercase mx-xl-5 mb-4">
+			<span class="bg-secondary pr-3">Categories</span>
+		</h2>
+		<div class="row px-xl-5 pb-3">
+			<div class="col-lg-3 col-md-4 col-sm-6 pb-1">
+				<a class="text-decoration-none" href="">
+					<div class="cat-item d-flex align-items-center mb-4">
+						<div class="overflow-hidden" style="width: 100px; height: 100px;">
+							<img class="img-fluid" src="img/cat-1.jpg" alt="">
+						</div>
+						<div class="flex-fill pl-3">
+							<h6>Category Name</h6>
+							<small class="text-body">100 Products</small>
+						</div>
+					</div>
+				</a>
+			</div>
+			<div class="col-lg-3 col-md-4 col-sm-6 pb-1">
+				<a class="text-decoration-none" href="">
+					<div class="cat-item img-zoom d-flex align-items-center mb-4">
+						<div class="overflow-hidden" style="width: 100px; height: 100px;">
+							<img class="img-fluid" src="img/cat-2.jpg" alt="">
+						</div>
+						<div class="flex-fill pl-3">
+							<h6>Category Name</h6>
+							<small class="text-body">100 Products</small>
+						</div>
+					</div>
+				</a>
+			</div>
+			<div class="col-lg-3 col-md-4 col-sm-6 pb-1">
+				<a class="text-decoration-none" href="">
+					<div class="cat-item img-zoom d-flex align-items-center mb-4">
+						<div class="overflow-hidden" style="width: 100px; height: 100px;">
+							<img class="img-fluid" src="img/cat-3.jpg" alt="">
+						</div>
+						<div class="flex-fill pl-3">
+							<h6>Category Name</h6>
+							<small class="text-body">100 Products</small>
+						</div>
+					</div>
+				</a>
+			</div>
+			<div class="col-lg-3 col-md-4 col-sm-6 pb-1">
+				<a class="text-decoration-none" href="">
+					<div class="cat-item img-zoom d-flex align-items-center mb-4">
+						<div class="overflow-hidden" style="width: 100px; height: 100px;">
+							<img class="img-fluid" src="img/cat-4.jpg" alt="">
+						</div>
+						<div class="flex-fill pl-3">
+							<h6>Category Name</h6>
+							<small class="text-body">100 Products</small>
+						</div>
+					</div>
+				</a>
+			</div>
+			<div class="col-lg-3 col-md-4 col-sm-6 pb-1">
+				<a class="text-decoration-none" href="">
+					<div class="cat-item img-zoom d-flex align-items-center mb-4">
+						<div class="overflow-hidden" style="width: 100px; height: 100px;">
+							<img class="img-fluid" src="img/cat-4.jpg" alt="">
+						</div>
+						<div class="flex-fill pl-3">
+							<h6>Category Name</h6>
+							<small class="text-body">100 Products</small>
+						</div>
+					</div>
+				</a>
+			</div>
+			<div class="col-lg-3 col-md-4 col-sm-6 pb-1">
+				<a class="text-decoration-none" href="">
+					<div class="cat-item img-zoom d-flex align-items-center mb-4">
+						<div class="overflow-hidden" style="width: 100px; height: 100px;">
+							<img class="img-fluid" src="img/cat-3.jpg" alt="">
+						</div>
+						<div class="flex-fill pl-3">
+							<h6>Category Name</h6>
+							<small class="text-body">100 Products</small>
+						</div>
+					</div>
+				</a>
+			</div>
+			<div class="col-lg-3 col-md-4 col-sm-6 pb-1">
+				<a class="text-decoration-none" href="">
+					<div class="cat-item img-zoom d-flex align-items-center mb-4">
+						<div class="overflow-hidden" style="width: 100px; height: 100px;">
+							<img class="img-fluid" src="img/cat-2.jpg" alt="">
+						</div>
+						<div class="flex-fill pl-3">
+							<h6>Category Name</h6>
+							<small class="text-body">100 Products</small>
+						</div>
+					</div>
+				</a>
+			</div>
+			<div class="col-lg-3 col-md-4 col-sm-6 pb-1">
+				<a class="text-decoration-none" href="">
+					<div class="cat-item img-zoom d-flex align-items-center mb-4">
+						<div class="overflow-hidden" style="width: 100px; height: 100px;">
+							<img class="img-fluid" src="img/cat-1.jpg" alt="">
+						</div>
+						<div class="flex-fill pl-3">
+							<h6>Category Name</h6>
+							<small class="text-body">100 Products</small>
+						</div>
+					</div>
+				</a>
+			</div>
+			<div class="col-lg-3 col-md-4 col-sm-6 pb-1">
+				<a class="text-decoration-none" href="">
+					<div class="cat-item img-zoom d-flex align-items-center mb-4">
+						<div class="overflow-hidden" style="width: 100px; height: 100px;">
+							<img class="img-fluid" src="img/cat-2.jpg" alt="">
+						</div>
+						<div class="flex-fill pl-3">
+							<h6>Category Name</h6>
+							<small class="text-body">100 Products</small>
+						</div>
+					</div>
+				</a>
+			</div>
+			<div class="col-lg-3 col-md-4 col-sm-6 pb-1">
+				<a class="text-decoration-none" href="">
+					<div class="cat-item img-zoom d-flex align-items-center mb-4">
+						<div class="overflow-hidden" style="width: 100px; height: 100px;">
+							<img class="img-fluid" src="img/cat-1.jpg" alt="">
+						</div>
+						<div class="flex-fill pl-3">
+							<h6>Category Name</h6>
+							<small class="text-body">100 Products</small>
+						</div>
+					</div>
+				</a>
+			</div>
+			<div class="col-lg-3 col-md-4 col-sm-6 pb-1">
+				<a class="text-decoration-none" href="">
+					<div class="cat-item img-zoom d-flex align-items-center mb-4">
+						<div class="overflow-hidden" style="width: 100px; height: 100px;">
+							<img class="img-fluid" src="img/cat-4.jpg" alt="">
+						</div>
+						<div class="flex-fill pl-3">
+							<h6>Category Name</h6>
+							<small class="text-body">100 Products</small>
+						</div>
+					</div>
+				</a>
+			</div>
+			<div class="col-lg-3 col-md-4 col-sm-6 pb-1">
+				<a class="text-decoration-none" href="">
+					<div class="cat-item img-zoom d-flex align-items-center mb-4">
+						<div class="overflow-hidden" style="width: 100px; height: 100px;">
+							<img class="img-fluid" src="img/cat-3.jpg" alt="">
+						</div>
+						<div class="flex-fill pl-3">
+							<h6>Category Name</h6>
+							<small class="text-body">100 Products</small>
+						</div>
+					</div>
+				</a>
+			</div>
+		</div>
+	</div>
+	<!-- Categories End -->
+
+
+	<!-- Products Start -->
+	<div class="container-fluid pt-5 pb-3">
+		<h2
+			class="section-title position-relative text-uppercase mx-xl-5 mb-4">
+			<span class="bg-secondary pr-3">Featured Products</span>
+		</h2>
+		<div class="row px-xl-5">
+			<div class="col-lg-3 col-md-4 col-sm-6 pb-1">
+				<div class="product-item bg-light mb-4">
+					<div class="product-img position-relative overflow-hidden">
+						<img class="img-fluid w-100" src="img/product-1.jpg" alt="">
+						<div class="product-action">
+							<a class="btn btn-outline-dark btn-square" href=""><i
+								class="fa fa-shopping-cart1"></i></a> <a
+								class="btn btn-outline-dark btn-square" href=""><i
+								class="far fa-heart"></i></a> <a
+								class="btn btn-outline-dark btn-square" href=""><i
+								class="fa fa-sync-alt"></i></a> <a
+								class="btn btn-outline-dark btn-square" href=""><i
+								class="fa fa-search"></i></a>
+						</div>
+					</div>
+					<div class="text-center py-4">
+						<a class="h6 text-decoration-none text-truncate" href="">Product
+							Name Goes Here</a>
+						<div class="d-flex align-items-center justify-content-center mt-2">
+							<h5>$123.00</h5>
+							<h6 class="text-muted ml-2">
+								<del>$123.00</del>
+							</h6>
+						</div>
+						<div class="d-flex align-items-center justify-content-center mb-1">
+							<small class="fa fa-star text-primary mr-1"></small> <small
+								class="fa fa-star text-primary mr-1"></small> <small
+								class="fa fa-star text-primary mr-1"></small> <small
+								class="fa fa-star text-primary mr-1"></small> <small
+								class="fa fa-star text-primary mr-1"></small> <small>(99)</small>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-3 col-md-4 col-sm-6 pb-1">
+				<div class="product-item bg-light mb-4">
+					<div class="product-img position-relative overflow-hidden">
+						<img class="img-fluid w-100" src="img/product-2.jpg" alt="">
+						<div class="product-action">
+							<a class="btn btn-outline-dark btn-square" href=""><i
+								class="fa fa-shopping-cart"></i></a> <a
+								class="btn btn-outline-dark btn-square" href=""><i
+								class="far fa-heart"></i></a> <a
+								class="btn btn-outline-dark btn-square" href=""><i
+								class="fa fa-sync-alt"></i></a> <a
+								class="btn btn-outline-dark btn-square" href=""><i
+								class="fa fa-search"></i></a>
+						</div>
+					</div>
+					<div class="text-center py-4">
+						<a class="h6 text-decoration-none text-truncate" href="">Product
+							Name Goes Here</a>
+						<div class="d-flex align-items-center justify-content-center mt-2">
+							<h5>$123.00</h5>
+							<h6 class="text-muted ml-2">
+								<del>$123.00</del>
+							</h6>
+						</div>
+						<div class="d-flex align-items-center justify-content-center mb-1">
+							<small class="fa fa-star text-primary mr-1"></small> <small
+								class="fa fa-star text-primary mr-1"></small> <small
+								class="fa fa-star text-primary mr-1"></small> <small
+								class="fa fa-star text-primary mr-1"></small> <small
+								class="fa fa-star-half-alt text-primary mr-1"></small> <small>(99)</small>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-3 col-md-4 col-sm-6 pb-1">
+				<div class="product-item bg-light mb-4">
+					<div class="product-img position-relative overflow-hidden">
+						<img class="img-fluid w-100" src="img/product-3.jpg" alt="">
+						<div class="product-action">
+							<a class="btn btn-outline-dark btn-square" href=""><i
+								class="fa fa-shopping-cart"></i></a> <a
+								class="btn btn-outline-dark btn-square" href=""><i
+								class="far fa-heart"></i></a> <a
+								class="btn btn-outline-dark btn-square" href=""><i
+								class="fa fa-sync-alt"></i></a> <a
+								class="btn btn-outline-dark btn-square" href=""><i
+								class="fa fa-search"></i></a>
+						</div>
+					</div>
+					<div class="text-center py-4">
+						<a class="h6 text-decoration-none text-truncate" href="">Product
+							Name Goes Here</a>
+						<div class="d-flex align-items-center justify-content-center mt-2">
+							<h5>$123.00</h5>
+							<h6 class="text-muted ml-2">
+								<del>$123.00</del>
+							</h6>
+						</div>
+						<div class="d-flex align-items-center justify-content-center mb-1">
+							<small class="fa fa-star text-primary mr-1"></small> <small
+								class="fa fa-star text-primary mr-1"></small> <small
+								class="fa fa-star text-primary mr-1"></small> <small
+								class="fa fa-star-half-alt text-primary mr-1"></small> <small
+								class="far fa-star text-primary mr-1"></small> <small>(99)</small>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-3 col-md-4 col-sm-6 pb-1">
+				<div class="product-item bg-light mb-4">
+					<div class="product-img position-relative overflow-hidden">
+						<img class="img-fluid w-100" src="img/product-4.jpg" alt="">
+						<div class="product-action">
+							<a class="btn btn-outline-dark btn-square" href=""><i
+								class="fa fa-shopping-cart"></i></a> <a
+								class="btn btn-outline-dark btn-square" href=""><i
+								class="far fa-heart"></i></a> <a
+								class="btn btn-outline-dark btn-square" href=""><i
+								class="fa fa-sync-alt"></i></a> <a
+								class="btn btn-outline-dark btn-square" href=""><i
+								class="fa fa-search"></i></a>
+						</div>
+					</div>
+					<div class="text-center py-4">
+						<a class="h6 text-decoration-none text-truncate" href="">Product
+							Name Goes Here</a>
+						<div class="d-flex align-items-center justify-content-center mt-2">
+							<h5>$123.00</h5>
+							<h6 class="text-muted ml-2">
+								<del>$123.00</del>
+							</h6>
+						</div>
+						<div class="d-flex align-items-center justify-content-center mb-1">
+							<small class="fa fa-star text-primary mr-1"></small> <small
+								class="fa fa-star text-primary mr-1"></small> <small
+								class="fa fa-star text-primary mr-1"></small> <small
+								class="far fa-star text-primary mr-1"></small> <small
+								class="far fa-star text-primary mr-1"></small> <small>(99)</small>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-3 col-md-4 col-sm-6 pb-1">
+				<div class="product-item bg-light mb-4">
+					<div class="product-img position-relative overflow-hidden">
+						<img class="img-fluid w-100" src="img/product-5.jpg" alt="">
+						<div class="product-action">
+							<a class="btn btn-outline-dark btn-square" href=""><i
+								class="fa fa-shopping-cart"></i></a> <a
+								class="btn btn-outline-dark btn-square" href=""><i
+								class="far fa-heart"></i></a> <a
+								class="btn btn-outline-dark btn-square" href=""><i
+								class="fa fa-sync-alt"></i></a> <a
+								class="btn btn-outline-dark btn-square" href=""><i
+								class="fa fa-search"></i></a>
+						</div>
+					</div>
+					<div class="text-center py-4">
+						<a class="h6 text-decoration-none text-truncate" href="">Product
+							Name Goes Here</a>
+						<div class="d-flex align-items-center justify-content-center mt-2">
+							<h5>$123.00</h5>
+							<h6 class="text-muted ml-2">
+								<del>$123.00</del>
+							</h6>
+						</div>
+						<div class="d-flex align-items-center justify-content-center mb-1">
+							<small class="fa fa-star text-primary mr-1"></small> <small
+								class="fa fa-star text-primary mr-1"></small> <small
+								class="fa fa-star text-primary mr-1"></small> <small
+								class="fa fa-star text-primary mr-1"></small> <small
+								class="fa fa-star text-primary mr-1"></small> <small>(99)</small>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-3 col-md-4 col-sm-6 pb-1">
+				<div class="product-item bg-light mb-4">
+					<div class="product-img position-relative overflow-hidden">
+						<img class="img-fluid w-100" src="img/product-6.jpg" alt="">
+						<div class="product-action">
+							<a class="btn btn-outline-dark btn-square" href=""><i
+								class="fa fa-shopping-cart"></i></a> <a
+								class="btn btn-outline-dark btn-square" href=""><i
+								class="far fa-heart"></i></a> <a
+								class="btn btn-outline-dark btn-square" href=""><i
+								class="fa fa-sync-alt"></i></a> <a
+								class="btn btn-outline-dark btn-square" href=""><i
+								class="fa fa-search"></i></a>
+						</div>
+					</div>
+					<div class="text-center py-4">
+						<a class="h6 text-decoration-none text-truncate" href="">Product
+							Name Goes Here</a>
+						<div class="d-flex align-items-center justify-content-center mt-2">
+							<h5>$123.00</h5>
+							<h6 class="text-muted ml-2">
+								<del>$123.00</del>
+							</h6>
+						</div>
+						<div class="d-flex align-items-center justify-content-center mb-1">
+							<small class="fa fa-star text-primary mr-1"></small> <small
+								class="fa fa-star text-primary mr-1"></small> <small
+								class="fa fa-star text-primary mr-1"></small> <small
+								class="fa fa-star text-primary mr-1"></small> <small
+								class="fa fa-star-half-alt text-primary mr-1"></small> <small>(99)</small>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-3 col-md-4 col-sm-6 pb-1">
+				<div class="product-item bg-light mb-4">
+					<div class="product-img position-relative overflow-hidden">
+						<img class="img-fluid w-100" src="img/product-7.jpg" alt="">
+						<div class="product-action">
+							<a class="btn btn-outline-dark btn-square" href=""><i
+								class="fa fa-shopping-cart"></i></a> <a
+								class="btn btn-outline-dark btn-square" href=""><i
+								class="far fa-heart"></i></a> <a
+								class="btn btn-outline-dark btn-square" href=""><i
+								class="fa fa-sync-alt"></i></a> <a
+								class="btn btn-outline-dark btn-square" href=""><i
+								class="fa fa-search"></i></a>
+						</div>
+					</div>
+					<div class="text-center py-4">
+						<a class="h6 text-decoration-none text-truncate" href="">Product
+							Name Goes Here</a>
+						<div class="d-flex align-items-center justify-content-center mt-2">
+							<h5>$123.00</h5>
+							<h6 class="text-muted ml-2">
+								<del>$123.00</del>
+							</h6>
+						</div>
+						<div class="d-flex align-items-center justify-content-center mb-1">
+							<small class="fa fa-star text-primary mr-1"></small> <small
+								class="fa fa-star text-primary mr-1"></small> <small
+								class="fa fa-star text-primary mr-1"></small> <small
+								class="fa fa-star-half-alt text-primary mr-1"></small> <small
+								class="far fa-star text-primary mr-1"></small> <small>(99)</small>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-3 col-md-4 col-sm-6 pb-1">
+				<div class="product-item bg-light mb-4">
+					<div class="product-img position-relative overflow-hidden">
+						<img class="img-fluid w-100" src="img/product-8.jpg" alt="">
+						<div class="product-action">
+							<a class="btn btn-outline-dark btn-square" href=""><i
+								class="fa fa-shopping-cart"></i></a> <a
+								class="btn btn-outline-dark btn-square" href=""><i
+								class="far fa-heart"></i></a> <a
+								class="btn btn-outline-dark btn-square" href=""><i
+								class="fa fa-sync-alt"></i></a> <a
+								class="btn btn-outline-dark btn-square" href=""><i
+								class="fa fa-search"></i></a>
+						</div>
+					</div>
+					<div class="text-center py-4">
+						<a class="h6 text-decoration-none text-truncate" href="">Product
+							Name Goes Here</a>
+						<div class="d-flex align-items-center justify-content-center mt-2">
+							<h5>$123.00</h5>
+							<h6 class="text-muted ml-2">
+								<del>$123.00</del>
+							</h6>
+						</div>
+						<div class="d-flex align-items-center justify-content-center mb-1">
+							<small class="fa fa-star text-primary mr-1"></small> <small
+								class="fa fa-star text-primary mr-1"></small> <small
+								class="fa fa-star text-primary mr-1"></small> <small
+								class="far fa-star text-primary mr-1"></small> <small
+								class="far fa-star text-primary mr-1"></small> <small>(99)</small>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Products End -->
+
+
+	<!-- Offer Start -->
+	<div class="container-fluid pt-5 pb-3">
+		<div class="row px-xl-5">
+			<div class="col-md-6">
+				<div class="product-offer mb-30" style="height: 300px;">
+					<img class="img-fluid" src="img/offer-1.jpg" alt="">
+					<div class="offer-text">
+						<h6 class="text-white text-uppercase">Save 20%</h6>
+						<h3 class="text-white mb-3">Special Offer</h3>
+						<a href="" class="btn btn-primary">Shop Now</a>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="product-offer mb-30" style="height: 300px;">
+					<img class="img-fluid" src="img/offer-2.jpg" alt="">
+					<div class="offer-text">
+						<h6 class="text-white text-uppercase">Save 20%</h6>
+						<h3 class="text-white mb-3">Special Offer</h3>
+						<a href="" class="btn btn-primary">Shop Now</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Offer End -->
+
+
+	<!-- Products Start -->
+	<div class="container-fluid pt-5 pb-3">
+		<h2
+			class="section-title position-relative text-uppercase mx-xl-5 mb-4">
+			<span class="bg-secondary pr-3">Recent Products</span>
+		</h2>
+		<div class="row px-xl-5">
+			<div class="col-lg-3 col-md-4 col-sm-6 pb-1">
+				<div class="product-item bg-light mb-4">
+					<div class="product-img position-relative overflow-hidden">
+						<img class="img-fluid w-100" src="img/product-1.jpg" alt="">
+						<div class="product-action">
+							<a class="btn btn-outline-dark btn-square" href=""><i
+								class="fa fa-shopping-cart"></i></a> <a
+								class="btn btn-outline-dark btn-square" href=""><i
+								class="far fa-heart"></i></a> <a
+								class="btn btn-outline-dark btn-square" href=""><i
+								class="fa fa-sync-alt"></i></a> <a
+								class="btn btn-outline-dark btn-square" href=""><i
+								class="fa fa-search"></i></a>
+						</div>
+					</div>
+					<div class="text-center py-4">
+						<a class="h6 text-decoration-none text-truncate" href="">Product
+							Name Goes Here</a>
+						<div class="d-flex align-items-center justify-content-center mt-2">
+							<h5>$123.00</h5>
+							<h6 class="text-muted ml-2">
+								<del>$123.00</del>
+							</h6>
+						</div>
+						<div class="d-flex align-items-center justify-content-center mb-1">
+							<small class="fa fa-star text-primary mr-1"></small> <small
+								class="fa fa-star text-primary mr-1"></small> <small
+								class="fa fa-star text-primary mr-1"></small> <small
+								class="fa fa-star text-primary mr-1"></small> <small
+								class="fa fa-star text-primary mr-1"></small> <small>(99)</small>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-3 col-md-4 col-sm-6 pb-1">
+				<div class="product-item bg-light mb-4">
+					<div class="product-img position-relative overflow-hidden">
+						<img class="img-fluid w-100" src="img/product-2.jpg" alt="">
+						<div class="product-action">
+							<a class="btn btn-outline-dark btn-square" href=""><i
+								class="fa fa-shopping-cart"></i></a> <a
+								class="btn btn-outline-dark btn-square" href=""><i
+								class="far fa-heart"></i></a> <a
+								class="btn btn-outline-dark btn-square" href=""><i
+								class="fa fa-sync-alt"></i></a> <a
+								class="btn btn-outline-dark btn-square" href=""><i
+								class="fa fa-search"></i></a>
+						</div>
+					</div>
+					<div class="text-center py-4">
+						<a class="h6 text-decoration-none text-truncate" href="">Product
+							Name Goes Here</a>
+						<div class="d-flex align-items-center justify-content-center mt-2">
+							<h5>$123.00</h5>
+							<h6 class="text-muted ml-2">
+								<del>$123.00</del>
+							</h6>
+						</div>
+						<div class="d-flex align-items-center justify-content-center mb-1">
+							<small class="fa fa-star text-primary mr-1"></small> <small
+								class="fa fa-star text-primary mr-1"></small> <small
+								class="fa fa-star text-primary mr-1"></small> <small
+								class="fa fa-star text-primary mr-1"></small> <small
+								class="fa fa-star-half-alt text-primary mr-1"></small> <small>(99)</small>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-3 col-md-4 col-sm-6 pb-1">
+				<div class="product-item bg-light mb-4">
+					<div class="product-img position-relative overflow-hidden">
+						<img class="img-fluid w-100" src="img/product-3.jpg" alt="">
+						<div class="product-action">
+							<a class="btn btn-outline-dark btn-square" href=""><i
+								class="fa fa-shopping-cart"></i></a> <a
+								class="btn btn-outline-dark btn-square" href=""><i
+								class="far fa-heart"></i></a> <a
+								class="btn btn-outline-dark btn-square" href=""><i
+								class="fa fa-sync-alt"></i></a> <a
+								class="btn btn-outline-dark btn-square" href=""><i
+								class="fa fa-search"></i></a>
+						</div>
+					</div>
+					<div class="text-center py-4">
+						<a class="h6 text-decoration-none text-truncate" href="">Product
+							Name Goes Here</a>
+						<div class="d-flex align-items-center justify-content-center mt-2">
+							<h5>$123.00</h5>
+							<h6 class="text-muted ml-2">
+								<del>$123.00</del>
+							</h6>
+						</div>
+						<div class="d-flex align-items-center justify-content-center mb-1">
+							<small class="fa fa-star text-primary mr-1"></small> <small
+								class="fa fa-star text-primary mr-1"></small> <small
+								class="fa fa-star text-primary mr-1"></small> <small
+								class="fa fa-star-half-alt text-primary mr-1"></small> <small
+								class="far fa-star text-primary mr-1"></small> <small>(99)</small>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-3 col-md-4 col-sm-6 pb-1">
+				<div class="product-item bg-light mb-4">
+					<div class="product-img position-relative overflow-hidden">
+						<img class="img-fluid w-100" src="img/product-4.jpg" alt="">
+						<div class="product-action">
+							<a class="btn btn-outline-dark btn-square" href=""><i
+								class="fa fa-shopping-cart"></i></a> <a
+								class="btn btn-outline-dark btn-square" href=""><i
+								class="far fa-heart"></i></a> <a
+								class="btn btn-outline-dark btn-square" href=""><i
+								class="fa fa-sync-alt"></i></a> <a
+								class="btn btn-outline-dark btn-square" href=""><i
+								class="fa fa-search"></i></a>
+						</div>
+					</div>
+					<div class="text-center py-4">
+						<a class="h6 text-decoration-none text-truncate" href="">Product
+							Name Goes Here</a>
+						<div class="d-flex align-items-center justify-content-center mt-2">
+							<h5>$123.00</h5>
+							<h6 class="text-muted ml-2">
+								<del>$123.00</del>
+							</h6>
+						</div>
+						<div class="d-flex align-items-center justify-content-center mb-1">
+							<small class="fa fa-star text-primary mr-1"></small> <small
+								class="fa fa-star text-primary mr-1"></small> <small
+								class="fa fa-star text-primary mr-1"></small> <small
+								class="far fa-star text-primary mr-1"></small> <small
+								class="far fa-star text-primary mr-1"></small> <small>(99)</small>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-3 col-md-4 col-sm-6 pb-1">
+				<div class="product-item bg-light mb-4">
+					<div class="product-img position-relative overflow-hidden">
+						<img class="img-fluid w-100" src="img/product-5.jpg" alt="">
+						<div class="product-action">
+							<a class="btn btn-outline-dark btn-square" href=""><i
+								class="fa fa-shopping-cart"></i></a> <a
+								class="btn btn-outline-dark btn-square" href=""><i
+								class="far fa-heart"></i></a> <a
+								class="btn btn-outline-dark btn-square" href=""><i
+								class="fa fa-sync-alt"></i></a> <a
+								class="btn btn-outline-dark btn-square" href=""><i
+								class="fa fa-search"></i></a>
+						</div>
+					</div>
+					<div class="text-center py-4">
+						<a class="h6 text-decoration-none text-truncate" href="">Product
+							Name Goes Here</a>
+						<div class="d-flex align-items-center justify-content-center mt-2">
+							<h5>$123.00</h5>
+							<h6 class="text-muted ml-2">
+								<del>$123.00</del>
+							</h6>
+						</div>
+						<div class="d-flex align-items-center justify-content-center mb-1">
+							<small class="fa fa-star text-primary mr-1"></small> <small
+								class="fa fa-star text-primary mr-1"></small> <small
+								class="fa fa-star text-primary mr-1"></small> <small
+								class="fa fa-star text-primary mr-1"></small> <small
+								class="fa fa-star text-primary mr-1"></small> <small>(99)</small>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-3 col-md-4 col-sm-6 pb-1">
+				<div class="product-item bg-light mb-4">
+					<div class="product-img position-relative overflow-hidden">
+						<img class="img-fluid w-100" src="img/product-6.jpg" alt="">
+						<div class="product-action">
+							<a class="btn btn-outline-dark btn-square" href=""><i
+								class="fa fa-shopping-cart"></i></a> <a
+								class="btn btn-outline-dark btn-square" href=""><i
+								class="far fa-heart"></i></a> <a
+								class="btn btn-outline-dark btn-square" href=""><i
+								class="fa fa-sync-alt"></i></a> <a
+								class="btn btn-outline-dark btn-square" href=""><i
+								class="fa fa-search"></i></a>
+						</div>
+					</div>
+					<div class="text-center py-4">
+						<a class="h6 text-decoration-none text-truncate" href="">Product
+							Name Goes Here</a>
+						<div class="d-flex align-items-center justify-content-center mt-2">
+							<h5>$123.00</h5>
+							<h6 class="text-muted ml-2">
+								<del>$123.00</del>
+							</h6>
+						</div>
+						<div class="d-flex align-items-center justify-content-center mb-1">
+							<small class="fa fa-star text-primary mr-1"></small> <small
+								class="fa fa-star text-primary mr-1"></small> <small
+								class="fa fa-star text-primary mr-1"></small> <small
+								class="fa fa-star text-primary mr-1"></small> <small
+								class="fa fa-star-half-alt text-primary mr-1"></small> <small>(99)</small>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-3 col-md-4 col-sm-6 pb-1">
+				<div class="product-item bg-light mb-4">
+					<div class="product-img position-relative overflow-hidden">
+						<img class="img-fluid w-100" src="img/product-7.jpg" alt="">
+						<div class="product-action">
+							<a class="btn btn-outline-dark btn-square" href=""><i
+								class="fa fa-shopping-cart"></i></a> <a
+								class="btn btn-outline-dark btn-square" href=""><i
+								class="far fa-heart"></i></a> <a
+								class="btn btn-outline-dark btn-square" href=""><i
+								class="fa fa-sync-alt"></i></a> <a
+								class="btn btn-outline-dark btn-square" href=""><i
+								class="fa fa-search"></i></a>
+						</div>
+					</div>
+					<div class="text-center py-4">
+						<a class="h6 text-decoration-none text-truncate" href="">Product
+							Name Goes Here</a>
+						<div class="d-flex align-items-center justify-content-center mt-2">
+							<h5>$123.00</h5>
+							<h6 class="text-muted ml-2">
+								<del>$123.00</del>
+							</h6>
+						</div>
+						<div class="d-flex align-items-center justify-content-center mb-1">
+							<small class="fa fa-star text-primary mr-1"></small> <small
+								class="fa fa-star text-primary mr-1"></small> <small
+								class="fa fa-star text-primary mr-1"></small> <small
+								class="fa fa-star-half-alt text-primary mr-1"></small> <small
+								class="far fa-star text-primary mr-1"></small> <small>(99)</small>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-lg-3 col-md-4 col-sm-6 pb-1">
+				<div class="product-item bg-light mb-4">
+					<div class="product-img position-relative overflow-hidden">
+						<img class="img-fluid w-100" src="img/product-8.jpg" alt="">
+						<div class="product-action">
+							<a class="btn btn-outline-dark btn-square" href=""><i
+								class="fa fa-shopping-cart"></i></a> <a
+								class="btn btn-outline-dark btn-square" href=""><i
+								class="far fa-heart"></i></a> <a
+								class="btn btn-outline-dark btn-square" href=""><i
+								class="fa fa-sync-alt"></i></a> <a
+								class="btn btn-outline-dark btn-square" href=""><i
+								class="fa fa-search"></i></a>
+						</div>
+					</div>
+					<div class="text-center py-4">
+						<a class="h6 text-decoration-none text-truncate" href="">Product
+							Name Goes Here</a>
+						<div class="d-flex align-items-center justify-content-center mt-2">
+							<h5>$123.00</h5>
+							<h6 class="text-muted ml-2">
+								<del>$123.00</del>
+							</h6>
+						</div>
+						<div class="d-flex align-items-center justify-content-center mb-1">
+							<small class="fa fa-star text-primary mr-1"></small> <small
+								class="fa fa-star text-primary mr-1"></small> <small
+								class="fa fa-star text-primary mr-1"></small> <small
+								class="far fa-star text-primary mr-1"></small> <small
+								class="far fa-star text-primary mr-1"></small> <small>(99)</small>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Products End -->
+
+
+	<!-- Vendor Start -->
+	<div class="container-fluid py-5">
+		<div class="row px-xl-5">
+			<div class="col">
+				<div class="owl-carousel vendor-carousel">
+					<div class="bg-light p-4">
+						<img src="img/vendor-1.jpg" alt="">
+					</div>
+					<div class="bg-light p-4">
+						<img src="img/vendor-2.jpg" alt="">
+					</div>
+					<div class="bg-light p-4">
+						<img src="img/vendor-3.jpg" alt="">
+					</div>
+					<div class="bg-light p-4">
+						<img src="img/vendor-4.jpg" alt="">
+					</div>
+					<div class="bg-light p-4">
+						<img src="img/vendor-5.jpg" alt="">
+					</div>
+					<div class="bg-light p-4">
+						<img src="img/vendor-6.jpg" alt="">
+					</div>
+					<div class="bg-light p-4">
+						<img src="img/vendor-7.jpg" alt="">
+					</div>
+					<div class="bg-light p-4">
+						<img src="img/vendor-8.jpg" alt="">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Vendor End -->
+
+
+	<!--****************************** Footer Start*********************************** -->
+	<div id="footerTemplate" th:fragment="footerTemplate">
+		<footer class="bg-dark text-light py-4">
+			<div class="container">
+				<div class="row">
+					<!-- Contacto -->
+					<div class="col-md-6 mb-3">
+						<h5 class="text-uppercase mb-3">Contáctanos</h5>
+						<p>
+							<i class="fa fa-map-marker-alt me-2 text-warning"></i> 123
+							Street, New York, USA
+						</p>
+						<p>
+							<i class="fa fa-envelope me-2 text-warning"></i>
+							info@ayalait.com.uy
+						</p>
+						<p>
+							<i class="fa fa-phone me-2 text-warning"></i> +012 345 67890
+						</p>
+					</div>
+
+					<!-- Redes sociales -->
+					<div class="col-md-6 mb-3 text-center text-md-end">
+						<h5 class="text-uppercase mb-3">Síguenos</h5>
+						<a class="btn btn-outline-light btn-sm mx-1" href="#"><i
+							class="fab fa-twitter"></i></a> <a
+							class="btn btn-outline-light btn-sm mx-1" href="#"><i
+							class="fab fa-facebook-f"></i></a> <a
+							class="btn btn-outline-light btn-sm mx-1" href="#"><i
+							class="fab fa-linkedin-in"></i></a> <a
+							class="btn btn-outline-light btn-sm mx-1" href="#"><i
+							class="fab fa-instagram"></i></a>
+					</div>
+				</div>
+				<div class="row border-top pt-3 mt-3">
+					<div class="col-12 text-center">
+						<small> &copy; <a href="#" class="text-warning">AyalaIT</a>.
+							Todos los derechos reservados.
+						</small>
+					</div>
+				</div>
+			</div>
+		</footer>
+	</div>
+
+	<!--******************************** Footer End *************************************-->
+	<!--********************************Loadin modal*************************************-->
+	<div id="loadingTemplate" th:fragment="loadingTemplate">
+		<!-- Modal Loadin -->
+		<div class="modal fade" id="loadingModal" data-bs-backdrop="static"
+			data-bs-keyboard="false" tabindex="-1" aria-labelledby="loadingModal"
+			aria-hidden="true">
+			<div class="modal-dialog modal-dialog-centered">
+				<div id="loadingContent" class="modal-content">
+
+					<div class="modal-body text-center mt-5 mb-5 loadingContent">
+						<div class="spinner-border text-success" role="status">
+							<span class="visually-hidden"></span>
+						</div>
+
+						<div class="mt-4">
+							<span>Cargando...</span>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+	<!--*******************************************FIN loading************************************************-->
+
+	<!--********************************login modal*************************************-->
+	<div id="loginTemplate" th:fragment="loginTemplate">
+		<!--Modal para login-->
+
+		<div class="modal" id="loginAutenticar" data-backdrop="static"
+			data-keyboard="false" tabindex="-1">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close"
+							onclick="cerrarModal('loginAutenticar'); return false"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+
+					<!-- Modal body -->
+					<div class="modal-body">
+
+
+						<span style="display: none;"><input type="hidden"
+							name="_frm" value="frmLogin"></span>
+						<div class="fld-grp">
+							<div class="fld">
+								<label class="lbl"><b>Correo electrónico</b> </label><input
+									type="email" value="algo@algo.com" id="txtEmail"
+									class="v_required v_email" autocomplete="off" required="">
+							</div>
+							<div class="fld">
+								<label class="lbl"><b>Contraseña</b> </label><input
+									type="password" value="admin" id="txtPassword"
+									class="v_required" autocomplete="off" required="">
+							</div>
+							<div class="fld">
+								<div class="lbl">
+									<label class="toggleButton"><input type="checkbox"
+										value="1" name="chxRecordarme" class="checkbox" checked=""><b>Recordarme
+											en este equipo.</b></label>
+								</div>
+							</div>
+						</div>
+						<div class="actions">
+							<button class="btn btn01 btnIngresar" onclick="login()">INGRESAR</button>
+							<a href="/recuperar-contrasena" class="btnOlvideContrasena">Olvidé
+								mi contraseña</a>
+							<div class="opcion">
+								No soy usuario registrado y quiero <a href="/crear-cuenta"
+									class="btnCrearCuenta">crear una cuenta</a>.
+							</div>
+						</div>
+
+						<br> <br> <br>
+
+						<div class="blk" id="blkLoginOpciones">
+
+							<div class="cnt">
+								<a
+									href="https://accounts.google.com/o/oauth2/auth?response_type=code&amp;redirect_uri=https%3A%2F%2Fwoofer.com.uy%2Flogin-con-google&amp;client_id=48986540989-b7soiv5qlmsdijbp689o0g0stjeusd51.apps.googleusercontent.com&amp;scope=email+profile&amp;access_type=online&amp;approval_prompt=auto"
+									class="btn btnLoginGoogle"><span class="ico"></span><i
+									class="bi bi-google"></i><span class="txt">INGRESAR CON
+										GOOGLE</span></a> <a href="javascript:;"
+									onclick="usuarios.showPPObtenerPIN()"
+									class="btn btn02 btnLoginPIN"> <!--  <span class="ico">&#59392;</span> -->
+									<span class="txt">Ingresar sin contraseña</span>
+								</a>
+							</div>
+						</div>
+
+
+						<!-- Modal footer -->
+						<div class="modal-footer"></div>
+
+
+					</div>
+				</div>
+
+
+			</div>
+		</div>
+		<!--End-->
+	</div>
+	<!--*******************************************FIN login************************************************-->
+
+	<!-- Back to Top -->
+	<a href="#" class="btn btn-primary back-to-top"><i
+		class="fa fa-angle-double-up"></i></a>
+
+
+	<!-- *************************************JavaScript Libraries ********************************-->
+	<div id="javaScriptemplate" th:fragment="javaScriptTemplate">
+		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+		<!-- jQuery (debe cargarse primero si otros scripts dependen de él) -->
+		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+		<!-- Select2 (depende de jQuery) -->
+		<script
+			src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+
+		<!-- Bootstrap JS (independiente de jQuery en Bootstrap 5) -->
+		<script
+			src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+
+		<!-- Otras librerías -->
+		<script src="lib/easing/easing.min.js"></script>
+		<script src="lib/owlcarousel/owl.carousel.min.js"></script>
+
+		<!-- Archivos JavaScript relacionados con formularios -->
+		<script src="mail/jqBootstrapValidation.min.js"></script>
+		<script src="mail/contact.js"></script>
+
+		<!-- Tus scripts personalizados (se cargan al final) -->
+		<script type="text/javascript" src="js/funciones.js"></script>
+		<script type="text/javascript" src="js/pago.js"></script>
+		<script type="text/javascript" src="js/login.js"></script>
+		<script type="text/javascript" src="js/index.js"></script>
+		<script type="text/javascript" src="js/main.js"></script>
+		<script type="text/javascript" src="js/callPage.js"></script>
+		<script type="text/javascript" src="js/cart.js"></script>
+		<script type="text/javascript" src="js/detail.js"></script>
+
+		<script>
+			validarSession();
+		</script>
+	</div>
+	<!-- *************************************  Fin JavaScript Libraries ********************************-->

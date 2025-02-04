@@ -1,0 +1,121 @@
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="template :: html_head">
+    <style>
+        #btnRegistrar {
+            width: 100px; /* Asegura un ancho fijo para el botón */
+            text-align: center;
+        }
+
+        .spinner-border {
+            width: 1rem; /* Ajusta el tamaño del spinner */
+            height: 1rem;
+        }
+
+        .spinner-hidden {
+            visibility: hidden; /* Oculta el texto sin quitar su espacio */
+        }
+
+        .spinner-visible {
+            visibility: visible;
+        }
+
+        #btnRecuperarPassword {
+            background-color: #007bff; /* Color azul primario */
+            border-color: #007bff; /* Borde azul primario */
+            color: #fff; /* Texto blanco */
+        }
+
+        #btnRecuperarPassword:hover {
+            background-color: #0056b3; /* Azul más oscuro al pasar el mouse */
+            border-color: #0056b3; /* Borde más oscuro al pasar el mouse */
+        }
+
+        /* Espaciado adicional entre el contenido y el footer */
+        .content-container {
+            margin-bottom: 50px; /* Ajusta el espacio entre el contenido y el footer */
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container" style="max-width: 1200px; margin: 0 auto;">
+
+    <!-- Topbar Start -->
+    <div th:replace="template :: header"></div>
+    <!-- Navbar Start -->
+
+    <div th:replace="template :: menu"></div>
+    <!-- Navbar End -->
+
+    <!-- Contenido Principal -->
+    <div class="container-fluid content-container">
+        <div class="row justify-content-center mt-5">
+            <div class="col-lg-6 col-md-8">
+                <div class="form-container">
+                    <h2>Actualizar usuario</h2>
+                    <form id="registerForm">
+                        <div class="row">
+                            <div class="col-md-6 form-group">
+                                <label for="nombre">Nombre</label>
+                                <input id="nombre" class="form-control" type="text" onchange="validarChange(this,'nombre')" placeholder="Ingrese su nombre" th:value="${user.name}">
+                            </div>
+
+                            <div class="col-md-6 form-group">
+                                <label for="email">E-mail</label>
+                                <input id="email" class="form-control" type="email" onchange="validarChange(this,'email')" placeholder="Ingrese su correo" th:value="${user.email}">
+                            </div>
+
+                            <div class="col-md-6 form-group">
+                                <label for="telefono">No. Télefono</label>
+                                <input id="telefono" class="form-control" type="text" onchange="validarChange(this,'telefono')" placeholder="Ingrese su teléfono" th:value="${user.phone}">
+                            </div>
+
+                            <div class="col-md-6 form-group">
+                                <label for="tipo-doc-select">Tipo de documento</label>
+                                <select class="form-select" id="tipo-doc-select" onchange="toggleDocumentoInput(this); validarChange(this, 'tipo-doc-select')">
+                                    <option disabled value="">Seleccione...</option>
+                                    <span th:each="doc : ${tipoDocumento}">
+                                        <option th:value="${doc.id}" th:selected="${doc.id == document_type}" th:text="${doc.tipo}"></option>
+                                    </span>
+                                </select>
+                            </div>
+
+                            <div class="col-md-6 form-group">
+                                <label for="documento">Documento</label>
+                                <input id="documento" class="form-control" onchange="validarChange(this,'documento')" type="text" th:value="${user.document}" placeholder="Ingrese su documento" disabled>
+                            </div>
+                        </div>
+
+                        <div class="form-footer mt-4">
+                            <button type="button" class="btn btn-primary" id="btnRegistrar" onclick="regitrarUsuario()">Actualizar</button>
+                            <button type="button" class="btn btn-warning" id="btnRecuperarPassword" onclick="">Recuperar Password</button>
+                            <button type="button" class="btn btn-danger" id="btnEliminarCuenta" onclick="deleteAcount()">Eliminar Cuenta</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    <!-- Footer -->
+    <div th:replace="template :: footerTemplate"></div>
+    <div th:replace="template :: javaScriptTemplate"></div>
+    
+    
+    <style>
+    #btnRecuperarPassword {
+        background-color: #007bff; /* Color azul primario */
+        border-color: #007bff; /* Borde azul primario */
+        color: #fff; /* Texto blanco */
+    }
+
+    #btnRecuperarPassword:hover {
+        background-color: #0056b3; /* Azul más oscuro al pasar el mouse */
+        border-color: #0056b3; /* Borde más oscuro al pasar el mouse */
+    }
+    </style>
+</body>
+
+</html>

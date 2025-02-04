@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="template :: html_head"></head>
+
+<body>
+
+	<div class="container" style="max-width: 1200px; margin: 0 auto;">
+
+		<!-- Topbar -->
+		<div th:replace="template :: header"></div>
+
+		<!-- Navbar -->
+		<div th:replace="template :: menu"></div>
+
+		<!-- Breadcrumb -->
+		<div class="container-fluid">
+			<div class="row px-xl-5">
+				<div class="col-12">
+					<nav class="breadcrumb bg-light mb-30">
+						<a class="breadcrumb-item text-dark" href="index">Inicio</a> <span
+							class="breadcrumb-item active">Ofertas</span>
+					</nav>
+				</div>
+			</div>
+		</div>
+
+		<!-- Página de Ofertas -->
+		<div class="container-fluid">
+			<div class="row">
+				<!-- Sidebar Filtros -->
+				<div class="col-lg-3 col-md-4">
+					<div class="bg-light p-4 mb-30">
+						<h5 class="section-title text-uppercase mb-4">Filtros</h5>
+
+						<!-- Checkbox: Llegan hoy -->
+						<div class="form-check form-switch mb-4">
+							<input class="form-check-input" type="checkbox" id="lleganHoy">
+							<label class="form-check-label" for="lleganHoy">Llegan
+								hoy</label>
+						</div>
+
+						<!-- Tipo de Promoción -->
+						<h6 class="text-uppercase mb-3">Tipo de Promoción</h6>
+						<div class="mb-3">
+							<label class="d-block"><input type="checkbox"
+								class="me-2">Oferta del día (562)</label> <label class="d-block"><input
+								type="checkbox" class="me-2">Oferta relámpago (1)</label>
+						</div>
+
+						<!-- Categorías -->
+						<h6 class="text-uppercase mb-3">Categorías</h6>
+						<div>
+							<label class="d-block"><a href="#" class="text-dark">Accesorios
+									para Vehículos (654)</a></label> <label class="d-block"><a href="#"
+								class="text-dark">Animales y Mascotas (278)</a></label> <label
+								class="d-block"><a href="#" class="text-dark">Electrodomésticos
+									(450)</a></label>
+							<!-- Agrega más categorías según tu necesidad -->
+						</div>
+					</div>
+				</div>
+
+				<!-- Ofertas -->
+				<div class="col-lg-9 col-md-8">
+					<h2 class="mb-4">Ofertas</h2>
+					<div class="row">
+						<!-- Producto -->
+						<div th:each="prod : ${productos}"
+							class="col-lg-4 col-md-6 col-sm-12 mb-4">
+							<div class="card h-100 shadow-sm">
+								<!-- Imagen del Producto -->
+								<div class="position-relative overflow-hidden">
+									<img th:src="@{'/img/' + ${prod.foto}}" class="card-img-top"
+										alt="Producto">
+									<div
+										class="badge bg-primary position-absolute top-0 start-0 m-2">OFERTA
+										DEL DÍA</div>
+								</div>
+								<!-- Detalles del Producto -->
+								<div
+									class="card-body d-flex flex-column justify-content-between">
+									<div>
+										<h6 class="card-title text-truncate" th:text="${prod.nombre}">Nombre
+											del producto</h6>
+										<p class="text-muted mb-1">
+											Por <span>Nombre Tienda</span>
+										</p>
+										<div class="mb-2">
+											<span class="text-success fw-bold">$999.99</span>
+											<del class="text-muted ms-2">$1,200.00</del>
+											<span class="badge bg-success ms-2">7% OFF</span>
+										</div>
+									</div>
+									<div>
+										<p class="text-muted">Envío gratis</p>
+										<p class="text-muted">
+											10 cuotas de <span>$99.99</span> sin interés
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+						<!-- Fin Producto -->
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+
+
+
+	<!-- Footer -->
+	<div th:replace="template :: footerTemplate"></div>
+
+	<!-- Scripts -->
+	<div th:replace="template :: javaScriptTemplate"></div>
+</body>
+
+</html>

@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="template :: html_head"></head>
+
+
+<body>
+
+	<div class="container" style="max-width: 1200px; margin: 0 auto;">
+
+		<!-- Topbar Start -->
+		<div th:replace="template :: header"></div>
+		<!-- Navbar Start -->
+
+		<div th:replace="template :: menu"></div>
+		<!-- Navbar End -->
+
+		<!-- Breadcrumb Start -->
+		<div class="container-fluid">
+			<div class="row px-xl-5">
+				<div class="col-12">
+					<nav class="breadcrumb bg-light mb-30">
+						<a class="breadcrumb-item text-dark" href="#">Home</a> <a
+							class="breadcrumb-item text-dark" href="#">Shop</a> <span
+							class="breadcrumb-item active">Checkout</span>
+					</nav>
+				</div>
+			</div>
+		</div>
+		<!-- Breadcrumb End -->
+
+
+		<!-- Checkout Start -->
+		<div class="container-fluid">
+			<div class="row px-xl-5">
+				<div class="col-lg-8">
+					<h5 class="section-title position-relative text-uppercase mb-3">
+						<span class="bg-secondary pr-3">Dirección de envio</span>
+					</h5>
+					<div class="bg-light p-30 mb-5">
+						<div class="row">
+							<div class="col-md-10" id="dire-ckeck">
+								<div th:each="address,iterator  :${direcciones}"
+									class="custom-control custom-checkbox">
+									<input type="checkbox" th:class="custom-control-input"
+										th:name="${iterator.count}" th:id="${address.idaddress}"
+										th:value="${address.idaddress}"> <label
+										class="custom-control-label" th:for="${address.idaddress}"
+										th:text="${address.alias}" data-toggle="collapse"
+										data-target="#shipping-address"></label> <input type="hidden"
+										id="cantidadDirecciones" name="cantidadDirecciones"
+										th:value="${iterator.size}">
+								</div>
+							</div>
+							<div class="col-md-2">
+								<button id="button-nueva-direccion"
+									class="btn btn-block btn-info"
+									onclick="abrirModal('ModalNuevaDireccion')">AGREGAR</button>
+
+							</div>
+						</div>
+
+					</div>
+					<div class="collapse mb-5" id="shipping-address">
+						<h5 class="section-title position-relative text-uppercase mb-3">
+							<span class="bg-secondary pr-3">Shipping Address</span>
+						</h5>
+						<div class="bg-light p-30" id="direccion-persona">
+							<div th:each="address :${direcciones}"
+								th:id="'dir'+${address.idaddress}" style="display: none;">
+								<div class="row">
+									<div class="col-md-6 form-group">
+										<label>Nombre y Apellidos</label> <input class="form-control"
+											type="text" placeholder="John"
+											th:if="${user.id == address.idusuario}"
+											th:value="${user.name}">
+									</div>
+
+									<div class="col-md-6 form-group">
+										<label>E-mail</label> <input class="form-control" type="text"
+											placeholder="example@email.com"
+											th:if="${user.id == address.idusuario}"
+											th:value="${user.email}">
+									</div>
+									<div class="col-md-6 form-group">
+										<label>Télefono</label> <input class="form-control"
+											type="text" placeholder="+123 456 789"
+											th:if="${user.id == address.idusuario}"
+											th:value="${user.phone}">
+									</div>
+									<div class="col-md-6 form-group">
+										<label>Dirección</label> <input class="form-control"
+											type="text" placeholder="123 Street"
+											th:if="${user.id == address.idusuario}"
+											th:value="${address.full_address}">
+									</div>
+									<div class="col-md-6 form-group">
+										<label>Departamento</label> <input class="form-control"
+											type="text" placeholder="New York"
+											th:if="${user.id == address.idusuario}"
+											th:value="${address.state}">
+									</div>
+									<div class="col-md-6 form-group">
+										<label>Localidad</label> <input class="form-control"
+											type="text" placeholder="New York"
+											th:if="${user.id == address.idusuario}"
+											th:value="${address.city}">
+									</div>
+									<div class="col-md-6 form-group">
+										<label>Código Postal</label> <input class="form-control"
+											type="text" placeholder="123"
+											th:if="${user.id == address.idusuario}"
+											th:value="${address.zip_code}">
+									</div>
+								</div>
+							</div>
+
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+		<!-- Checkout End -->
+
+		<!-- ******************************MODAL NUEVA DIRECCION  -->
+		<div class="modal" id="ModalNuevaDireccion" tabindex="-1"
+			role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+
+					<div class="modal-header" style="background: #17a2b8;">
+						<h4 class="modal-title">
+							<strong>NUEVA DIRECCION</strong>
+						</h4>
+						<button type="button" class="close"
+							onclick="cerrarModal('ModalNuevaDireccion'); return false"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+
+
+					<!-- Modal body -->
+					<div class="modal-body">
+
+						<div class="col-md-10">
+							<label for="txt_alias">Alias:</label> <input type="text"
+								id="txt_alias" name="txt_alias" class="form-control" required>
+						</div>
+
+
+						<div class="col-md-10 ">
+							<label for="txt_dpto">Departamento:</label> <select
+								class="custom-select" id="tipo-dpto-select"
+								onchange="validarChange(this,'tipo-dpto-select')">
+								<option th:each="dpto :${departamento}"
+									th:value="${dpto.departamento}" th:text="${dpto.departamento}"></option>
+							</select>
+						</div>
+
+
+						<div class="col-md-10 ">
+							<label for="txt_ciudad">Ciudad:</label> <input type="text"
+								id="txt_ciudad" name="txt_ciudad" class="form-control" required></input>
+						</div>
+
+						<div class="col-md-10 ">
+							<label for="txt_direccion">Dirección:</label> <input type="text"
+								id="txt_direccion" class="form-control" required></input>
+						</div>
+
+						<div class="col-md-5 ">
+							<label for="txt_zip">Código Postal:</label> <input type="text"
+								id="txt_zip" class="form-control" required></input>
+						</div>
+
+						<br>
+
+						<!-- Modal footer -->
+						<div class="modal-footer">
+							<button type="button" class="btn btn-danger"
+								onclick="cerrarModal('ModalNuevoClientes'); return false">Cerrar</button>
+							<button type="submit" class="btn btn-success" href="javascript:;"
+								onclick="guardarDireccionNueva(); return false">Guardar</button>
+						</div>
+
+
+
+					</div>
+
+				</div>
+
+			</div>
+
+		</div>
+		<!-- FIN MODAL DIRECCION -->
+	</div>
+
+	<div th:replace="template :: footerTemplate"></div>
+	<div th:replace="template :: loadingTemplate"></div>
+	<div th:replace="template :: loginTemplate"></div>
+
+
+
+	<!-- Back to Top -->
+	<a href="#" class="btn btn-primary back-to-top"><i
+		class="fa fa-angle-double-up"></i></a>
+
+
+	<div th:replace="template :: javaScriptTemplate"></div>
+
+
+
+
+
+</body>
+
+</html>

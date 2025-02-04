@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="template :: html_head"></head>
+
+<body>
+
+<div class="container" style="max-width: 1200px; margin: 0 auto;">
+
+	<!-- Topbar Start -->
+	<div th:replace="template :: header"></div>
+	<!-- Navbar Start -->
+
+	<div th:replace="template :: menu"></div>
+	<!-- Navbar End -->
+
+
+	<!-- Breadcrumb Start -->
+		<div class="container-fluid">
+			<div class="row px-xl-5">
+				<div class="col-12">
+					<nav class="breadcrumb bg-light mb-30">
+						<a class="breadcrumb-item text-dark" href="#">Inicio</a> <a
+							class="breadcrumb-item text-dark" th:each="item : ${productos}" th:href="@{'/category?id=' + ${item.tipoproducto}}">Categoria</a> 
+						<a	class="breadcrumb-item text-dark" th:each="item : ${productos}" th:href="@{'/products?id=' + ${item.categoria}}">Productos</a> <span
+							class="breadcrumb-item active">Detalle Producto</span>
+					</nav>
+				</div>
+			</div>
+		</div>
+
+	 <!-- Contenido principal -->
+    <div class="container py-5">
+        <div class="row gx-7">
+            <!-- Galería de Imágenes -->
+            <div class="col-lg-5">
+                <div class="d-flex">
+					<div class="thumbnails d-flex flex-column me-3">
+						<img th:each="imagen : ${imagenes}"
+							th:src="@{'/img/' + ${imagen.nombre}}"
+							class="img-thumbnail mb-2 miniatura cursor-pointer"
+							th:attr="onclick=|changeImage('/img/${imagen.nombre}')|"
+							alt="Miniatura"> <img th:each="item : ${productos}"
+							th:src="@{'/img/' + ${item.foto}}"
+							class="img-thumbnail mb-2 miniatura cursor-pointer"
+							th:attr="onclick=|changeImage('/img/${item.foto}')|"
+							alt="Imagen Principal Miniatura">
+					</div>
+					<div class="main-image">
+						<img id="mainImage" th:each="item : ${productos}"
+							th:src="@{'/img/' + ${item.foto}}"
+							class="img-fluid rounded principal-imagen" alt="Imagen Principal">
+					</div>
+				</div>
+			</div>
+
+			<!-- Información del Producto -->
+			<div class="col-lg-7">
+				<div class="product-detail bg-light p-4 rounded shadow-sm">
+					<h3 id="name-product" class="font-weight-bold" th:each="item : ${productos}"
+						th:text="${item.nombre}">Silla Gamer UH</h3>
+					<div class="rating mb-3">
+						<span class="text-primary"> <!-- Estrellas completas --> <span
+							th:each="i : ${T(java.util.stream.IntStream).range(0, promedioEstrellasValidado != null ? promedioEstrellasValidado.intValue() : 0).toArray()}">
+								<i class="fas fa-star"></i>
+						</span> <!-- Estrella media --> <i class="fas fa-star-half-alt"
+							th:if="${promedioEstrellasValidado != null and promedioEstrellasValidado.doubleValue() % 1 >= 0.5}"></i>
+
+							<!-- Estrellas vacías --> <i class="far fa-star"
+							th:each="i : ${#numbers.sequence(1, 5 - (promedioEstrellasValidado != null ? promedioEstrellasValidado.intValue() : 0) - (promedioEstrellasValidado != null and promedioEstrellasValidado.doubleValue() % 1 >= 0.5 ? 1 : 0))}"></i>
+						</span> <small th:text="'(' + ${cantidadResenas ?: 0} + ' Reseñas)'"></small>
+					</div>
+					<div class="price mb-3">
+						<h4 class="text-primary font-weight-bold mb-0"
+							th:each="item : ${productos}"
+							th:text="${item.precioventaFormateado}">$3,949.21</h4>
+						<small class="text-muted"><del
+								th:each="item : ${productos}"
+								th:text="${item.preciooriginalFormateado}">$4,999.00</del></small>
+					</div>
+					<p class="mb-3">Con un diseño ergonómico y reposapiés
+						ajustable, esta silla gamer es ideal para largas horas de juego o
+						trabajo.</p>
+
+					<!-- Selección de Color -->
+					<h6 class="font-weight-bold">Color:</h6>
+					<div class="colors d-flex mb-4">
+						<span
+							class="color-option bg-primary rounded-circle mx-1 cursor-pointer"
+							onclick="selectColor('Azul')" style="width: 30px; height: 30px;"></span>
+						<span
+							class="color-option bg-dark rounded-circle mx-1 cursor-pointer"
+							onclick="selectColor('Negro')" style="width: 30px; height: 30px;"></span>
+						<span
+							class="color-option bg-danger rounded-circle mx-1 cursor-pointer"
+							onclick="selectColor('Rojo')" style="width: 30px; height: 30px;"></span>
+					</div>
+
+					<!-- Cantidad y Botones -->
+					<div class="d-flex align-items-center mb-4">
+						<div class="input-group quantity mr-3" style="width: 120px;">
+							<button class="btn btn-outline-primary btn-minus">
+								<i class="fa fa-minus"></i>
+							</button>
+							<input id="cantidad-product-car" type="text"
+								class="form-control text-center" value="1">
+							<button class="btn btn-outline-primary btn-plus">
+								<i class="fa fa-plus"></i>
+							</button>
+						</div>
+						<span th:each="prod :${productos}">
+							<button id="btnAddCarito" class="btn btn-primary px-3 mr-2"
+								th:onclick="agregarProductoCarrito('[(${prod.id})]',
+                            '[(${prod.precioventa})]', 'op1')">
+								<i class="fa fa-shopping-cart mr-1"></i> Agregar al Carrito
+							</button>
+						</span> <span id="button-agregar-prod-cart"> </span>
+						<button class="btn btn-success px-3">Comprar Ahora</button>
+					</div>
+				</div>
+
+
+
+				<!-- Card: Características del Producto -->
+				<div class="card bg-light p-4 rounded shadow-sm mt-4"
+					th:if="${detalleProducto != null and detalleProducto.mapa != null and !detalleProducto.mapa.isEmpty()}">
+					<h4 class="card-title mb-4">Características del Producto</h4>
+					<div class="row">
+						<!-- Divide las características en dos columnas -->
+						<div class="col-lg-6"
+							th:each="entry : ${detalleProducto.mapa.entrySet()}">
+							<p>
+								<i class="fas fa-check-circle text-success"></i> <span
+									th:text="${entry.key}"></span>: <span class="font-weight-bold"
+									th:text="${entry.value}"></span>
+							</p>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+
+		<!-- Productos Relacionados y Medios de Pago -->
+		<div class="container py-5">
+			<div class="row px-xl-5">
+				<!-- Contenedor para Productos Relacionados -->
+				<div class="col-lg-8">
+					<h4 class="mb-4">Productos Relacionados</h4>
+					<div class="d-flex align-items-center">
+						<!-- Botón para desplazarse a la izquierda -->
+						<button class="btn btn-primary me-2" id="btn-left">
+							<i class="fas fa-chevron-left"></i>
+						</button>
+
+						<!-- Contenedor de productos con desplazamiento horizontal -->
+						<div class="d-flex overflow-auto" id="productos-container"
+							style="gap: 20px; scroll-behavior: smooth;">
+							<!-- Iterar la lista de productos relacionados -->
+							<div th:each="producto : ${productosRelacionados}"
+								class="product-item bg-light text-center p-3 rounded shadow-sm"
+								style="min-width: 300px; flex-shrink: 0;"
+								th:onclick="linkEnvioDetalleProducto('detail','[(${producto.id})]',null)">
+								<!-- Imagen del producto -->
+								<img th:src="@{'/img/' + ${producto.foto}}" alt="Producto"
+									class="img-fluid mb-3 rounded"
+									style="height: 150px; object-fit: cover;">
+
+								<!-- Nombre del producto -->
+								<h6 class="font-weight-bold" th:text="${producto.nombre}">Nombre
+									del producto</h6>
+
+								<!-- Precio del producto -->
+								<p class="text-primary mb-1"
+									th:text="${(producto.precioventaFormateado)}">$0.00</p>
+
+								<!-- Cuotas del producto -->
+								<p class="text-muted mb-1"
+									th:text="'En ' + ${producto.cuotaspago} + ' cuotas de ' + ${producto.cuotasFormateadas} + ' sin interés'">Cuotas</p>
+
+								<!-- Envío gratis -->
+								<small class="text-success d-block" th:text="'Envío Gratis'">Envío
+									Gratis</small>
+
+								<!-- Precio anterior y descuento, si existe -->
+								<p class="text-muted mb-0"
+									th:if="${producto.preciooriginalFormateado != null}">
+									<del th:text="${(producto.preciooriginalFormateado)}">$0.00</del>
+									<span class="text-danger"
+										th:text="' ' + ${producto.descuento} + '% OFF'">Descuento</span>
+								</p>
+							</div>
+						</div>
+
+						<!-- Botón para desplazarse a la derecha -->
+						<button class="btn btn-primary ms-2" id="btn-right">
+							<i class="fas fa-chevron-right"></i>
+						</button>
+					</div>
+				</div>
+
+
+				<!-- Contenedor para Medios de Pago -->
+				<div class="col-lg-4">
+					<h4 class="mb-4">Medios de Pago</h4>
+					<div class="bg-light p-4 rounded">
+						<button class="btn btn-success w-100 mb-3">¡Paga en hasta
+							12 cuotas sin interés!</button>
+						<h6>Tarjetas de crédito</h6>
+						<div class="d-flex align-items-center mb-3">
+							<img src="img/mastercard.svg" alt="Mastercard"
+								style="width: 40px;" class="mr-2"> <img src="img/visa.svg"
+								alt="Visa" style="width: 40px;" class="mr-2"> <img
+								src="img/amex.svg" alt="American Express" style="width: 40px;"
+								class="mr-2"> <img src="img/oca.svg" alt="OCA"
+								style="width: 40px;">
+						</div>
+						<h6>Tarjetas de débito</h6>
+						<div class="d-flex align-items-center mb-3">
+							<img src="img/visa-debito.svg" alt="Visa Débito"
+								style="width: 40px;" class="mr-2"> <img
+								src="img/mastercard-debito.svg" alt="Mastercard Débito"
+								style="width: 40px;">
+						</div>
+						<h6>Efectivo</h6>
+						<div class="d-flex align-items-center">
+							<img src="img/redpagos.svg" alt="RedPagos" style="width: 40px;">
+						</div>
+						<a href="#" class="text-primary mt-3 d-block">Conoce otros
+							medios de pago</a>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+
+
+		<!-- Descripción -->
+		<div class="row px-xl-5 mt-5" th:if="${detalleProducto.caracteristica != null}">
+			<div class="col-lg-12">
+				<div class="card bg-light p-4 rounded shadow-sm">
+					<h4 class="card-title mb-4">Descripción</h4>
+					<pre th:each="detalle : ${detalleProducto}"
+						th:text="${detalle.caracteristica}"></pre>
+				</div>
+			</div>
+		</div>
+
+		<!-- Preguntas y Respuestas -->
+		<div class="row px-xl-5 mt-5">
+			<div class="col-lg-12">
+				<div class="card bg-light p-4 rounded shadow-sm">
+					<h4 class="card-title mb-4">Preguntas y Respuestas</h4>
+					<div id="preguntas-container">
+						<p>Cargando preguntas y respuestas...</p>
+					</div>
+					<form id="form-pregunta" onsubmit="enviarPregunta(event)">
+						<div class="form-group">
+							<label for="pregunta">¿Tienes alguna pregunta?</label>
+							<textarea id="pregunta" class="form-control" rows="3"
+								placeholder="Escribe tu pregunta aquí" required></textarea>
+						</div>
+						<button type="submit" class="btn btn-primary">Enviar</button>
+					</form>
+				</div>
+			</div>
+		</div>
+		
+		<!-- Script para cargar preguntas al inicio -->
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        cargarPreguntasYRespuestas();
+    });
+</script>
+	</div>
+
+</div>
+
+
+
+
+	<div th:replace="template :: footerTemplate"></div>
+	<div th:replace="template :: loadingTemplate"></div>
+	<div th:replace="template :: loginTemplate"></div>
+
+
+
+	<!-- Back to Top -->
+	<a href="#" class="btn btn-primary back-to-top"><i
+		class="fa fa-angle-double-up"></i></a>
+
+	<div th:replace="template :: javaScriptTemplate"></div>
+</body>
+
+</html>

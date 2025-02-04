@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="template :: html_head"></head>
+
+<body>
+
+	<div class="container" style="max-width: 1200px; margin: 0 auto;">
+
+		<!-- Topbar Start -->
+		<div th:replace="template :: header"></div>
+		<!-- Navbar Start -->
+
+		<div th:replace="template :: menu"></div>
+		<!-- Navbar End -->
+
+		<!-- Breadcrumb Start -->
+		<div class="container-fluid">
+			<div class="row px-xl-5">
+				<div class="col-12">
+					<nav class="breadcrumb bg-light mb-30">
+						<a class="breadcrumb-item text-dark" href="index">Inicio</a> <a
+							class="breadcrumb-item text-dark"
+							th:if="${productos != null and !productos.isEmpty()}"
+							th:href="@{'/category?id=' + ${productos[0].tipoproducto}}">Categoria</a>
+						<span class="breadcrumb-item active">Productos</span>
+					</nav>
+				</div>
+			</div>
+		</div>
+		<!-- Breadcrumb End -->
+
+
+		<!-- Shop Start -->
+		<!-- Filtros mejorados y mensaje cuando no hay resultados -->
+		<div class="container-fluid">
+			<div class="row px-xl-5">
+				<!-- Sidebar de filtros -->
+				<div class="col-lg-3 col-md-4">
+					<h5 class="section-title text-uppercase mb-3">
+						<span class="bg-secondary pr-3">Filtros</span>
+					</h5>
+					<div class="bg-light p-4 mb-4">
+						<form>
+							<!-- Filtro por precio -->
+							<h6 class="text-uppercase mb-3">Por Precio</h6>
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" id="price1"
+									name="price" value="0-100"> <label
+									class="form-check-label" for="price1">$0 - $100</label>
+							</div>
+							<div class="form-check">
+								<input class="form-check-input" type="checkbox" id="price2"
+									name="price" value="100-200"> <label
+									class="form-check-label" for="price2">$100 - $200</label>
+							</div>
+							<!-- Más rangos aquí -->
+							<button type="submit" class="btn btn-primary btn-sm mt-3">Aplicar
+								Filtros</button>
+						</form>
+						<hr>
+						<!-- Ordenar por precio -->
+						<h6 class="text-uppercase mb-3">Ordenar</h6>
+						<select class="form-select">
+							<option value="low-high">Menor a Mayor</option>
+							<option value="high-low">Mayor a Menor</option>
+						</select>
+					</div>
+				</div>
+				<!-- Contenedor de productos -->
+				<div class="col-lg-9 col-md-8">
+					<div class="row g-4" id="productos-item-all">
+						<!-- Cambié g-3 a g-4 para mayor separación -->
+						<!-- Mostrar mensaje si no hay productos -->
+						<div th:if="${productos.empty}" class="col-12 text-center">
+							<h5>No se obtuvieron resultados</h5>
+						</div>
+						<!-- Mostrar productos -->
+						<div th:each="prod : ${productos}"
+							class="col-lg-6 col-md-6 col-sm-12">
+							<!-- Ajusté a col-lg-4 para menos tarjetas por fila -->
+							<div class="card product-item shadow-sm h-100"
+								style="cursor: pointer;"
+								th:onclick="linkEnvioDetalleProducto('detail','[(${prod.id})]',null)">
+								<!-- Imagen del producto -->
+								<div class="position-relative overflow-hidden"
+									style="height: 150px;">
+									<img class="card-img-top img-fluid"
+										th:src="@{'/img/' + ${prod.foto}}" alt="Producto">
+								</div>
+								<!-- Contenido del producto -->
+								<div class="card-body text-center">
+									<span class="badge bg-warning text-dark mb-2"
+										th:if="${prod.posicionMasVendido < 3}"
+										th:text="${prod.posicionMasVendido + '° MÁS VENDIDO'}">1°
+										MÁS VENDIDO</span>
+									<h6 class="card-title text-truncate mb-1"
+										th:text="${prod.nombre}">Nombre del Producto</h6>
+
+									<h5 class="text-success mb-1"
+										th:text="${prod.precioventaFormateado}">US$ 177.66</h5>
+									<del class="small text-muted"
+										th:text="${prod.preciooriginalFormateado}">US$ 189</del>
+									<span class="badge bg-success text-light ms-2"
+										th:text="${prod.descuento} + '%'">6% OFF</span>
+									<p class="small text-muted mt-1"
+										th:text="'En ' + ${prod.cuotaspago} + ' cuotas de ' + ${prod.cuotasFormateadas} + ' sin interés'">en
+										10 cuotas de $803.02</p>
+									<p class="text-success small mb-0">Envío gratis</p>
+								</div>
+							</div>
+						</div>
+					</div>
+					<br>
+					<!-- Paginación -->
+					<div class="col-12" th:if="${!productos.empty}">
+						<nav>
+							<ul class="pagination justify-content-center">
+								<!-- Botón "Anterior" -->
+								<li class="page-item"
+									th:classappend="${currentPage == 0} ? 'disabled'"><a
+									class="page-link"
+									th:href="@{'/products?id=' + ${id} + '&page=' + (${currentPage - 1}) + '&size=' + ${size}}"
+									aria-label="Previous"> <span aria-hidden="true">&laquo;</span>
+								</a></li>
+
+								<!-- Páginas -->
+								<li th:each="page : ${#numbers.sequence(0, totalPages - 1)}"
+									th:classappend="${page == currentPage} ? 'active'"
+									class="page-item"><a class="page-link"
+									th:href="@{'/products?id=' + ${id} + '&page=' + ${page} + '&size=' + ${size}}"
+									th:text="${page + 1}"></a></li>
+
+								<!-- Botón "Siguiente" -->
+								<li class="page-item"
+									th:classappend="${currentPage + 1 >= totalPages} ? 'disabled'">
+									<a class="page-link"
+									th:href="@{'/products?id=' + ${id} + '&page=' + (${currentPage + 1}) + '&size=' + ${size}}"
+									aria-label="Next"> <span aria-hidden="true">&raquo;</span>
+								</a>
+								</li>
+							</ul>
+						</nav>
+					</div>
+				</div>
+
+
+
+			</div>
+		</div>
+	</div>
+	<!-- Shop End -->
+
+
+	<div th:replace="template :: footerTemplate"></div>
+	<div th:replace="template :: loadingTemplate"></div>
+	<div th:replace="template :: loginTemplate"></div>
+
+
+
+	<!-- Back to Top -->
+	<a href="#" class="btn btn-primary back-to-top"><i
+		class="fa fa-angle-double-up"></i></a>
+
+	<div th:replace="template :: javaScriptTemplate"></div>
+
+
+</body>
+
+</html>

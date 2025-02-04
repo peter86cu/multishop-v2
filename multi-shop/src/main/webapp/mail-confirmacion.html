@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<HEAD>
+<STYLE>
+P {color:red;}
+</STYLE>
+</HEAD>
+<BODY>
+Esta es una prueba de <b>envio de correo HTML</b> mediante Java.
+Emplea una clase implementada por mi y con ella esto es tan sencillo como escribir este código:
+<br/>
+<br/>
+<P>
+
+<br/>
+<font color='green'>// fijar el contenido</font><br/>
+String contenidoHTML = HTMLMail.loadHTMLFile("/home/jose/articulo.html");<br/>
+mail.addContent(contenidoHTML);<br/>
+<br/>
+<font color='green'>// enviar CID de una imagen</font><br/>
+mail.addCID("cidimage01", "/home/jose/firma.gif");<br/>
+<br/>
+<font color='green'>// enviar atachados un par de ficheros</font><br/>
+mail.addAttach("/home/jose/image.gif");<br/>
+mail.addAttach("/home/jose/bison_1_0.zip");<br/>
+<br/>
+<font color='green'>// enviar el correo MULTIPART</font><br/>
+mail.sendMultipart();<br/>
+</P>
+El resultado es el que estais viendo. Si os interesa el tema o quereis ver mas tutoriales. Conectate a...
+<br/>
+<br/>
+<a th:href="http://localhost:8080/confirmation?token=${}">Confirmar</a>
+<br/>
+<br/>
+Saludos,
+<br>
+<img src='cid:cidimage01' />
+</BODY>
+</HTML>

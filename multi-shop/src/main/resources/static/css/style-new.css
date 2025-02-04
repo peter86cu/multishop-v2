@@ -1,0 +1,930 @@
+.fld>.lbl::after {
+            content: "";
+            overflow: hidden;
+            display: block;
+            height: 0;
+            clear: both
+        }
+
+        .fld>.lbl::after {
+            content: "";
+            overflow: hidden;
+            display: block;
+            height: 0;
+            clear: both
+        }
+
+        .fld>.lbl>b {
+            font-weight: normal;
+            color: #000000;
+            font-weight: bold;
+            display: block;
+            line-height: 20px;
+            padding: 10px 0 5px 5px
+        }
+
+        .fld-grp>*,
+        .fld {
+            margin-bottom: 10px;
+            font-size: 12px;
+            line-height: 20px
+        }
+
+        label.toggleButton {
+            position: relative;
+            padding: 10px 0 10px 28px;
+            display: inline-block;
+            margin-right: 20px
+        }
+
+        label.toggleButton>input {
+            position: absolute;
+            opacity: 0;
+        }
+
+        label.toggleButton>input+b {
+            line-height: 20px;
+            font-weight: normal
+        }
+
+        label.toggleButton>input+b:before {
+            cursor: pointer;
+            border: 1px solid #ededed;
+            border-radius: 2px;
+            content: '';
+            display: block;
+            float: left;
+            width: 20px;
+            height: 20px;
+            margin-left: -28px;
+            background-color: #ffffff
+        }
+
+        label.toggleButton>input+b:hover:before {
+            background-color: #ffffff
+        }
+
+        label.toggleButton>input[type=radio]+b:before {
+            border-radius: 100%
+        }
+
+        label.toggleButton>input[type=radio]:checked+b:before {
+            box-shadow: 0 0 0 4px #ffffff inset, 0 0 0 10px #fcb831 inset
+        }
+
+        label.toggleButton>input[type=checkbox]:checked+b:before {
+            content: '\e80C';
+            color: #fcb831;
+            font-family: "FIconos";
+            text-align: center;
+            line-height: 18px;
+            font-size: 15px
+        }
+
+        .actions {
+            margin-top: 30px
+        }
+
+        .actions>.btn+.btn {
+            margin-left: 10px
+        }
+
+        .btn01 {
+            background: #fcb831
+        }
+
+        .btn01:hover,
+        .btn01:focus {
+            background: #ffcc45
+        }
+
+        .btn01,
+        .btn02,
+        .btn03,
+        .btn04,
+        .btnInputFile {
+            padding: 0 25px;
+            font-weight: 400;
+            border-radius: 3px;
+            color: #ffffff;
+            line-height: 40px;
+            font-size: 20px;
+        }
+
+        .actions>.btn01 {
+            display: block;
+            width: 100%
+        }
+
+        .actions>.btnOlvideContrasena {
+            display: inline-block;
+            margin-top: 20px;
+            line-height: 15px;
+            font-size: 20px
+        }
+
+        .actions>.btnOlvideContrasena:hover {
+            color: #c8196e
+        }
+
+        .actions a {
+            text-decoration: underline;
+        }
+
+        a {
+            outline: 0 !important;
+            text-decoration: none;
+            color: #fcb831;
+        }
+
+        .lbl>input {
+            max-width: inherit;
+        }
+
+       
+        .toggleButton,.fld input:not([type="radio"]):not([type="file"]):not([type="checkbox"]) {
+            padding: 0 10px;
+        }
+
+        .toggleButton,.fld input:not([type="radio"]):not([type="file"]):not([type="checkbox"]) {
+            width: 100%;
+            font-family: "Poppins", sans-serif;
+            font-size: 13px;
+            line-height: 20px;
+            height: 40px;
+            border-radius: 3px;
+            border: 1px solid #ededed;
+            box-sizing: border-box;
+            background: #ffffff;
+        }
+
+        .fld-grp>*,
+        .fld {
+            margin-bottom: 10px;
+            font-size: 18px;
+            line-height: 20px;
+        }
+
+        #blkLoginOpciones>.cnt .btn {
+    display: block;
+    margin-bottom: 20px
+}
+
+#blkLoginOpciones>.cnt .btn {
+    display: block;
+    margin-bottom: 20px;
+}
+
+
+.btnInputFile[data-disabled=on] {
+    background: #cccccc;
+    color: #ffffff;
+    pointer-events: none
+}
+
+.btnLoginFacebook {
+    background: #3b4f92;
+    font-size: 13px;
+    padding: 0;
+    border-radius: 3px;
+    color: #ffffff;
+    margin-bottom: 20px
+}
+
+.btnLoginFacebook>.txt {
+    line-height: 40px;
+    vertical-align: middle
+}
+
+.btnLoginFacebook>.ico {
+    display: inline-block;
+    line-height: 40px;
+    font-size: 20px;
+    font-weight: normal;
+    margin-right: 15px;
+    vertical-align: middle
+}
+
+.btnLoginFacebook:hover {
+    background: #4f63a6
+}
+
+.btnLoginGoogle {
+    background: #dc4e41;
+    font-size: 20px;
+    padding: 0 20px;
+    border-radius: 3px;
+    color: #ffffff;
+    margin-bottom: 20px
+}
+
+.btnLoginGoogle>.txt {
+    line-height: 40px;
+    vertical-align: middle
+}
+
+.btnLoginGoogle>.ico {
+    display: inline-block;
+    line-height: 40px;
+    font-size: 20px;
+    font-weight: normal;
+    margin-right: 15px;
+    vertical-align: middle
+}
+
+.btnLoginGoogle:hover {
+    background: #f06255
+}
+
+.blk .btnLoginGoogle {
+    display: block
+}
+
+
+
+.cnt.btn {
+    white-space: nowrap;
+    text-transform: uppercase;
+    text-align: center;
+    font-family: "Poppins",sans-serif;
+    background: none;
+    cursor: pointer;
+    border: none;
+    display: inline-block;
+}
+
+
+
+/*nuevo para el carrito/
+/* Estilos para el ver carrito */
+/* Estilos base del carrito desplegable */
+.carrito-desplegable {
+    display: none; /* Inicialmente oculto */
+    position: absolute;
+    top: 100%; /* Justo debajo del ícono del carrito */
+    right: 0;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    z-index: 1000;
+    padding: 10px;
+    animation: slideDown 0.3s ease-out; /* Animación al aparecer */
+}
+
+/* Estilo para el encabezado */
+.carrito-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+/* Botón de cerrar */
+.close-btn {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+/* Animación para desplegar */
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Mostrar carrito desplegable */
+.carrito-desplegable.show {
+    display: block;
+}
+/****ccs para carrito*****/
+/* Contenedor del carrito desplegable */
+.carrito-desplegable {
+    display: none; /* Inicialmente oculto */
+    position: absolute;
+    top: 50px; /* Ajusta según el tamaño del header */
+    right: 10px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    width: 320px;
+    z-index: 1000;
+    animation: slideIn 0.3s ease-out; /* Animación para desplegar */
+    overflow: hidden;
+}
+
+/* Encabezado del carrito */
+.carrito-header {
+    background-color: #f8f9fa; /* Color gris claro */
+    padding: 10px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #ddd;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Botón de cerrar */
+.carrito-header .close-btn {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    color: #666;
+}
+
+/* Tabla del carrito */
+.carrito-desplegable .table {
+    margin: 0;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.carrito-desplegable .table th, .carrito-desplegable .table td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    font-size: 0.9rem;
+}
+
+/* Estilo del total */
+.carrito-desplegable .text-end {
+    padding: 10px 15px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Footer del carrito */
+.carrito-footer {
+    padding: 10px 15px;
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    background-color: #f8f9fa;
+    border-top: 1px solid #ddd;
+}
+
+/* Botones en el footer */
+.carrito-footer .btn {
+    flex: 1;
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+.carrito-footer .btn-primary {
+    background-color: #fdd835; /* Amarillo de la página */
+    border: none;
+    color: #333;
+}
+
+.carrito-footer .btn-primary:hover {
+    background-color: #ffc107; /* Amarillo más oscuro */
+    color: #000;
+}
+
+.carrito-footer .btn-secondary {
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+    color: #333;
+}
+
+.carrito-footer .btn-secondary:hover {
+    background-color: #e0e0e0;
+    color: #000;
+}
+
+/* Animación para desplegar */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Mostrar el carrito */
+/* Miniaturas */
+.miniatura {
+    width: 80px; /* Tamaño pequeño para las miniaturas */
+    height: 80px;
+    object-fit: cover;
+    cursor: pointer;
+    transition: transform 0.2s ease; /* Efecto de hover */
+}
+
+.miniatura:hover {
+    transform: scale(1.1); /* Efecto de agrandamiento */
+    border: 2px solid #007bff; /* Color azul de borde */
+}
+
+/* Imagen principal */
+.principal-imagen {
+    max-width: 100%;
+    max-height: 500px; /* Ajusta según tus necesidades */
+    object-fit: contain;
+}
+
+/****productos relacionados *********/
+.bg-light {
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+.product-item {
+    border: 1px solid #ddd;
+    padding: 15px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-item:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.product-item img {
+    max-height: 150px;
+    object-fit: contain;
+}
+
+.product-item h6 {
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+.product-item p {
+    margin: 5px 0;
+}
+
+.color-option {
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.color-option:hover {
+    transform: scale(1.2);
+}
+
+.media img {
+    border-radius: 50%;
+}
+
+.media-body h6 {
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+/*****pagina index********/
+
+.carousel-caption {
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    border-radius: 10px;
+    text-align: left;
+}
+
+.card {
+    border: none;
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+
+/* Elimina los márgenes y paddings entre el menú y el carrusel */
+.navbar {
+    margin-bottom: 0 !important; /* Asegúrate de que el menú no tenga margen */
+}
+
+#main-carousel {
+    margin-top: 0; /* Elimina cualquier margen superior del carrusel */
+    padding: 0; /* Asegúrate de que no haya relleno alrededor del carrusel */
+}
+
+.carousel-inner img {
+    margin: 0;
+    padding: 0;
+    border: none; /* Evita bordes no deseados en las imágenes */
+}
+
+#menu {
+    margin-bottom: 0 !important; /* Elimina margen inferior del menú */
+    padding-bottom: 0 !important; /* Elimina relleno inferior del menú */
+}
+
+#header-carousel {
+    margin-top: 0 !important; /* Asegúrate de que no haya margen superior */
+    padding-top: 0 !important; /* Asegúrate de que no haya relleno superior */
+}
+
+.carousel-inner img {
+    margin: 0;
+    padding: 0;
+    border: none; /* Asegúrate de que las imágenes del carrusel no tengan espacio extra */
+}
+body, html {
+    margin: 0;
+    padding: 0;
+}
+
+/****botones carrusel bannner******/
+
+/* Botones invisibles inicialmente */
+.invisible-button {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+/* Mostrar botones al pasar el mouse */
+#main-carousel:hover .invisible-button {
+    opacity: 1;
+}
+
+/* Estilos generales de los botones */
+.carousel-control-prev,
+.carousel-control-next {
+    width: 50px;
+    height: 50px;
+    background-color: white;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Botón izquierdo pegado al borde izquierdo */
+.carousel-control-prev {
+    left: 0;
+}
+
+/* Botón derecho pegado al borde derecho */
+.carousel-control-next {
+    right: 0;
+}
+
+/* Estilo de los íconos */
+.carousel-control-prev-icon i,
+.carousel-control-next-icon i {
+    font-size: 20px;
+    color: blue; /* Color azul para los íconos */
+}
+
+/* Cambiar fondo del botón al pasar el mouse */
+.carousel-control-prev:hover,
+.carousel-control-next:hover {
+    background-color: #f8f9fa;
+    transition: background-color 0.3s ease;
+}
+/**********header principal *******/
+/* Menú general */
+.navbar {
+    background-color: #343a40;
+    padding: 10px 20px;
+}
+
+.navbar .nav-link {
+    font-size: 1rem;
+    margin-right: 15px;
+    transition: color 0.3s ease-in-out;
+}
+
+.navbar .nav-link:hover {
+    color: #ffcc00;
+}
+
+.navbar .dropdown-menu {
+    animation: fadeIn 0.3s;
+}
+
+.navbar .dropdown-item:hover {
+    background-color: #ffcc00;
+    color: #343a40;
+}
+
+.navbar .btn {
+    border-radius: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.navbar .btn:hover {
+    background-color: #ffcc00;
+    color: #343a40;
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+/* Ajustes generales del dropdown */
+.dropdown-menu {
+    top: 100%;
+    left: auto;
+    right: 0; /* Asegura que se alinee correctamente hacia la derecha */
+    transform: translateY(10px); /* Espaciado desde el botón */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    border: 1px solid #ddd;
+}
+
+/* Bordes y espaciado */
+.dropdown-menu .form-label {
+    font-size: 14px;
+    color: #333;
+}
+
+.dropdown-menu .form-control {
+    font-size: 14px;
+    border-radius: 4px;
+}
+
+/* Botón de ingresar */
+.dropdown-menu .btn-danger {
+    background-color: #dc3545;
+    border: none;
+    font-size: 14px;
+}
+
+.dropdown-menu a.text-danger {
+    font-size: 13px;
+    text-decoration: underline;
+}
+
+
+/* Estilo de la tarjeta de categorías */
+.category-card {
+    transition: all 0.3s ease-in-out;
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: #f9f9f9;
+}
+
+.category-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Imagen de la categoría */
+.category-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    transition: all 0.3s ease;
+}
+
+.category-card:hover .category-image {
+    transform: scale(1.1);
+}
+
+/* Superposición para resaltar categoría */
+.category-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    transition: all 0.3s ease;
+}
+
+.category-card:hover .category-overlay {
+    opacity: 1;
+}
+
+/* Título dentro de la tarjeta */
+.card-title {
+    font-size: 18px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+/* Texto de productos */
+.card-body small {
+    font-size: 14px;
+    color: #666;
+}
+
+/*css para los botones mas y menos del carrito */
+.cantidad-control {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px; /* Espacio entre botones y cantidad */
+}
+
+.cantidad-btn {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border-radius: 50%; /* Botones circulares */
+    font-size: 16px;
+}
+
+.cantidad-text {
+    min-width: 30px;
+    text-align: center;
+    font-weight: bold;
+    font-size: 16px;
+}
+/*css para ajustar los botnes del carrito*/
+/* Ajustar el tamaño del formulario del carrito */
+.carrito-desplegable {
+    width: 500px; /* Ancho del carrito */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    background-color: #fff;
+    position: absolute;
+    right: 20px;
+    top: 60px;
+    z-index: 1050;
+}
+
+/* Estilo para los botones */
+.carrito-footer .btn {
+    width: 120px; /* Hacer los botones más grandes */
+    margin: 5px;
+    font-size: 16px; /* Agrandar texto */
+    padding: 10px;
+    border-radius: 8px;
+}
+
+/* Botón de papelera */
+.carrito-footer .btn-danger {
+    background-color: #ff4d4d;
+    border: none;
+}
+
+/* Botón de pagar */
+.carrito-footer .btn-primary {
+    background-color: #ffd700;
+    border: none;
+    color: #000;
+}
+
+/* Botón de ver carrito */
+.carrito-footer .btn-secondary {
+    background-color: #e0e0e0;
+    border: none;
+    color: #000;
+}
+
+/* Mejorar diseño de la tabla */
+.table {
+    font-size: 16px; /* Agrandar texto de la tabla */
+    margin-top: 10px;
+}
+
+.table th, .table td {
+    vertical-align: middle;
+}
+
+/* Imágenes de productos */
+.table img {
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-right: 10px;
+}
+
+/* Control de cantidad */
+.cantidad-control {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.cantidad-control button {
+    width: 35px;
+    height: 35px;
+    font-size: 18px;
+    border-radius: 50%;
+    border: none;
+    background-color: #f0f0f0;
+}
+
+.cantidad-control span {
+    font-size: 18px;
+    font-weight: bold;
+    min-width: 30px;
+    text-align: center;
+}
+/*css para productos relacionados*/
+#productos-container {
+    display: flex;
+    overflow-x: auto;
+    gap: 20px;
+    padding: 10px 0;
+}
+
+#productos-container::-webkit-scrollbar {
+    display: none; /* Ocultar scrollbar */
+}
+
+.product-item {
+    width: 300px;
+    flex-shrink: 0; /* Asegura que no se reduzcan los elementos */
+}
+/*Prueba card de productos*/
+.card {
+	border: 1px solid #ddd;
+	border-radius: 8px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+	transition: transform 0.2s, box-shadow 0.2s;
+	height: 100%;
+}
+
+.card:hover {
+	transform: scale(1.02);
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Imagen */
+.card .card-img-top {
+	object-fit: contain;
+	height: 200px;
+	width: 100%;
+	background-color: #f9f9f9;
+	border-bottom: 1px solid #ddd;
+}
+
+/* Contenido de la tarjeta */
+.card-body {
+	padding: 16px;
+	text-align: left;
+}
+
+.card-title {
+	font-size: 16px;
+	font-weight: 600;
+	color: #333;
+	margin-bottom: 8px;
+}
+
+.card-body p {
+	font-size: 14px;
+	color: #777;
+	margin: 0;
+}
+
+/* Precios */
+.card-body h5 {
+	color: #28a745;
+	font-weight: bold;
+	margin-bottom: 4px;
+}
+
+.card-body del {
+	color: #999;
+	font-size: 14px;
+}
+
+/* Badge (OFERTA DEL DÍA) */
+.badge {
+	font-size: 12px;
+	padding: 6px 8px;
+	border-radius: 4px;
+}
+
+.badge.bg-primary {
+	background-color: #ffc107;
+	color: #fff;
+}
+
+/* Responsive */
+@media ( max-width : 768px) {
+	.card .card-img-top {
+		height: 150px;
+	}
+}
+
