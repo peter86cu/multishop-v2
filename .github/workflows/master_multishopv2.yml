@@ -16,8 +16,13 @@ jobs:
       contents: read #This is required for actions/checkout
 
     steps:
-      - uses: actions/checkout@v4
+      # Clonar el repositorio y los submódulos
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          submodules: true
 
+      # Configurar Java 17
       - name: Set up Java version
         uses: actions/setup-java@v4
         with:
@@ -31,7 +36,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: java-app
-          path: '${{ github.workspace }}/target/*.jar'
+          path: '${{ github.workspace }}/multi-shop/target/*.war'
 
   deploy:
     runs-on: ubuntu-latest
@@ -62,5 +67,5 @@ jobs:
         with:
           app-name: 'multishopv2'
           slot-name: 'Production'
-          package: '*.jar'
+          package: '*.war'
           
