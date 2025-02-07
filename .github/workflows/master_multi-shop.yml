@@ -16,22 +16,22 @@ jobs:
     steps:
       # Clonar el repositorio y los submódulos
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           submodules: true
 
       # Configurar Java 17
       - name: Set up Java version
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v4
         with:
           java-version: '17'
           distribution: 'microsoft'
 
       - name: Upload artifact for deployment job
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: java-app
-          path: '${{ github.workspace }}/multi-sho/target/*.war'
+          path: '${{ github.workspace }}/multi-shop/target/*.war'
 
   deploy:
     runs-on: ubuntu-latest
@@ -48,7 +48,7 @@ jobs:
 
       - name: Deploy to Azure Web App
         id: deploy-to-webapp
-        uses: azure/webapps-deploy@v2
+        uses: azure/webapps-deploy@v3
         with:
           app-name: 'multi-shop'
           slot-name: 'Production'
