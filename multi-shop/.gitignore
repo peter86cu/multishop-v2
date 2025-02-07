@@ -1,0 +1,21 @@
+# Ignorar archivos compilados de Java
+*.class
+
+# Ignorar directorios de compilación de Java
+bin/
+build/
+out/
+
+# Ignorar archivos de Maven y Gradle
+target/
+*.jar
+*.war
+*.ear
+*.iml
+
+# Ignorar configuraciones de IDEs
+.idea/
+*.log
+*.swp
+.DS_Store
+*.tmp

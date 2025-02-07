@@ -21,7 +21,7 @@ public interface ParametrosService {
     
     ResponseListaModeloProducto listadoModelosProducto();    
     
-    ResponseListaProductos consultarListaProductos();
+    ResponseListaProductos consultarListaProductos() ;
     
     ResponseMonedas listarMonedas();
     

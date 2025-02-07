@@ -39,6 +39,7 @@ import com.google.gson.JsonParser;
 import com.multishop.modelo.DptoPais;
 import com.multishop.modelo.ShoppingHistoryEstado;
 import com.multishop.response.*;
+import com.online.multishop.SSLConfig;
 import com.online.multishop.dto.PreguntaRespuesta;
 import com.online.multishop.vo.RequestAddCart;
 import com.online.multishop.vo.ResponsePreguntaRespuesta;
@@ -206,6 +207,13 @@ public class ParametrosServiceImpl implements ParametrosService {
 			noti.setAccion("listadoTipoProducto");
 			noti.setId(UUID.randomUUID().toString());
 			URI uri = new URI(url);
+			try {
+				restTemplate = SSLConfig.getRestTemplate();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
 			ResponseEntity<List<TipoProducto>> response = restTemplate.exchange(uri, HttpMethod.GET, null,
 					new ParameterizedTypeReference<List<TipoProducto>>() {
 					});
