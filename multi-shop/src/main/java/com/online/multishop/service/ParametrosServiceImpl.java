@@ -267,11 +267,12 @@ public class ParametrosServiceImpl implements ParametrosService {
 
 			String url = this.hostStock + "/parametros/categoria";
 			URI uri = new URI(url);
-			noti.setFecha_inicio(FormatearFechas.obtenerFechaPorFormato("yyyy-MM-dd hh:mm:ss"));
-			noti.setClass_id("multishop-APP");
-
-			noti.setAccion("listarCategorias");
-			noti.setId(UUID.randomUUID().toString());
+			try {
+				restTemplate = SSLConfig.getRestTemplate();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			ResponseEntity<List<Categoria>> response = restTemplate.exchange(uri, HttpMethod.GET, null,
 					new ParameterizedTypeReference<List<Categoria>>() {
 					});
@@ -325,11 +326,13 @@ public class ParametrosServiceImpl implements ParametrosService {
 
 			String url = this.hostStock + "/parametros/marcas";
 
-			noti.setFecha_inicio(FormatearFechas.obtenerFechaPorFormato("yyyy-MM-dd hh:mm:ss"));
-			noti.setClass_id("multishop-APP");
 			URI uri = new URI(url);
-			noti.setAccion("listadoMarcasProducto");
-			noti.setId(UUID.randomUUID().toString());
+			try {
+				restTemplate = SSLConfig.getRestTemplate();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			ResponseEntity<List<MarcaProducto>> response = restTemplate.exchange(uri, HttpMethod.GET, null,
 					new ParameterizedTypeReference<List<MarcaProducto>>() {
 					});
@@ -361,12 +364,7 @@ public class ParametrosServiceImpl implements ParametrosService {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		noti.setFecha_fin(FormatearFechas.obtenerFechaPorFormato("yyyy-MM-dd hh:mm:ss"));
-		/*
-		 * ResponseResultado result = guardarLog(noti); if (!result.isStatus()) {
-		 * System.err.println(result.getError().getCode() + " " +
-		 * result.getError().getMenssage()); }
-		 */
+		
 
 		return responseResult;
 
@@ -384,11 +382,14 @@ public class ParametrosServiceImpl implements ParametrosService {
 
 			String url = this.hostStock + "/parametros/modelos";
 
-			noti.setFecha_inicio(FormatearFechas.obtenerFechaPorFormato("yyyy-MM-dd hh:mm:ss"));
-			noti.setClass_id("multishop-APP");
+			
 			URI uri = new URI(url);
-			noti.setAccion("listadoModelosProducto");
-			noti.setId(UUID.randomUUID().toString());
+			try {
+				restTemplate = SSLConfig.getRestTemplate();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			ResponseEntity<List<ModeloProducto>> response = restTemplate.exchange(uri, HttpMethod.GET, null,
 					new ParameterizedTypeReference<List<ModeloProducto>>() {
 					});
@@ -420,12 +421,7 @@ public class ParametrosServiceImpl implements ParametrosService {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		noti.setFecha_fin(FormatearFechas.obtenerFechaPorFormato("yyyy-MM-dd hh:mm:ss"));
-		/*
-		 * ResponseResultado result = guardarLog(noti); if (!result.isStatus()) {
-		 * System.err.println(result.getError().getCode() + " " +
-		 * result.getError().getMenssage()); }
-		 */
+		
 
 		return responseResult;
 
@@ -442,11 +438,14 @@ public class ParametrosServiceImpl implements ParametrosService {
 
 			String url = this.hostStock + "/productos/lista";
 
-			noti.setFecha_inicio(FormatearFechas.obtenerFechaPorFormato("yyyy-MM-dd hh:mm:ss"));
-			noti.setClass_id("multishop-APP");
+			
 			URI uri = new URI(url);
-			noti.setAccion("consultarListaProductos");
-			noti.setId(UUID.randomUUID().toString());
+			try {
+				restTemplate = SSLConfig.getRestTemplate();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			ResponseEntity<List<Producto>> response = restTemplate.exchange(uri, HttpMethod.GET, null,
 					new ParameterizedTypeReference<List<Producto>>() {
 					});
@@ -478,13 +477,7 @@ public class ParametrosServiceImpl implements ParametrosService {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		noti.setFecha_fin(FormatearFechas.obtenerFechaPorFormato("yyyy-MM-dd hh:mm:ss"));
-		/*
-		 * ResponseResultado result = guardarLog(noti); if (!result.isStatus()) {
-		 * System.err.println(result.getError().getCode() + " " +
-		 * result.getError().getMenssage()); }
-		 */
-
+		
 		return responseResult;
 
 	}
@@ -500,11 +493,14 @@ public class ParametrosServiceImpl implements ParametrosService {
 
 			String url = this.hostStock + "/parametros/monedas";
 
-			noti.setFecha_inicio(FormatearFechas.obtenerFechaPorFormato("yyyy-MM-dd hh:mm:ss"));
-			noti.setClass_id("multishop-APP");
+			
 			URI uri = new URI(url);
-			noti.setAccion("listarMonedas");
-			noti.setId(UUID.randomUUID().toString());
+			try {
+				restTemplate = SSLConfig.getRestTemplate();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			ResponseEntity<List<Moneda>> response = restTemplate.exchange(uri, HttpMethod.GET, null,
 					new ParameterizedTypeReference<List<Moneda>>() {
 					});
@@ -536,12 +532,7 @@ public class ParametrosServiceImpl implements ParametrosService {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		noti.setFecha_fin(FormatearFechas.obtenerFechaPorFormato("yyyy-MM-dd hh:mm:ss"));
-		/*
-		 * ResponseResultado result = guardarLog(noti); if (!result.isStatus()) {
-		 * System.err.println(result.getError().getCode() + " " +
-		 * result.getError().getMenssage()); }
-		 */
+		
 
 		return responseResult;
 
@@ -556,11 +547,12 @@ public class ParametrosServiceImpl implements ParametrosService {
 		try {
 			String url = this.hostStock + "/productos/imagenes?id=" + id;
 			URI uri = new URI(url);
-			noti.setFecha_inicio(FormatearFechas.obtenerFechaPorFormato("yyyy-MM-dd hh:mm:ss"));
-			noti.setClass_id("multishop-APP");
-			noti.setRequest(id);
-			noti.setAccion("imagenesProducto");
-			noti.setId(UUID.randomUUID().toString());
+			try {
+				restTemplate = SSLConfig.getRestTemplate();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			ResponseEntity<List<ProductoImagenes>> response = null;
 			try {
 				response = restTemplate.exchange(uri, HttpMethod.GET, null,
@@ -615,12 +607,7 @@ public class ParametrosServiceImpl implements ParametrosService {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		noti.setFecha_fin(FormatearFechas.obtenerFechaPorFormato("yyyy-MM-dd hh:mm:ss"));
-		/*
-		 * ResponseResultado result = guardarLog(noti); if (!result.isStatus()) {
-		 * System.err.println(result.getError().getCode() + " " +
-		 * result.getError().getMenssage()); }
-		 */
+		
 
 		return responseResult;
 
@@ -636,11 +623,12 @@ public class ParametrosServiceImpl implements ParametrosService {
 		try {
 			String url = this.hostStock + "/productos/detalle?id=" + id;
 			URI uri = new URI(url);
-			noti.setFecha_inicio(FormatearFechas.obtenerFechaPorFormato("yyyy-MM-dd hh:mm:ss"));
-			noti.setClass_id("multishop-APP");
-			noti.setRequest(id);
-			noti.setAccion("detalleProducto");
-			noti.setId(UUID.randomUUID().toString());
+			try {
+				restTemplate = SSLConfig.getRestTemplate();
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			ResponseEntity<ProductoDetalles> response = null;
 			try {
 				response = restTemplate.exchange(uri, HttpMethod.GET, null, ProductoDetalles.class);
@@ -676,12 +664,7 @@ public class ParametrosServiceImpl implements ParametrosService {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				noti.setFecha_fin(FormatearFechas.obtenerFechaPorFormato("yyyy-MM-dd hh:mm:ss"));
-				/*
-				 * ResponseResultado result = guardarLog(noti); if (!result.isStatus()) {
-				 * System.err.println(result.getError().getCode() + " " +
-				 * result.getError().getMenssage()); }
-				 */
+				
 
 				return responseResult;
 			}
@@ -706,12 +689,7 @@ public class ParametrosServiceImpl implements ParametrosService {
 				e1.printStackTrace();
 			}
 		}
-		noti.setFecha_fin(FormatearFechas.obtenerFechaPorFormato("yyyy-MM-dd hh:mm:ss"));
-		/*
-		 * ResponseResultado result = guardarLog(noti); if (!result.isStatus()) {
-		 * System.err.println(result.getError().getCode() + " " +
-		 * result.getError().getMenssage()); }
-		 */
+		
 
 		return responseResult;
 

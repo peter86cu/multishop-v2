@@ -14,8 +14,8 @@ public class SSLConfig {
 
     public static RestTemplate getRestTemplate() throws Exception {
         KeyStore trustStore = KeyStore.getInstance("PKCS12");
-        try (InputStream is = SSLConfig.class.getClassLoader().getResourceAsStream("truststore.p12")) {
-            trustStore.load(is, "changeit".toCharArray());
+        try (InputStream is = SSLConfig.class.getClassLoader().getResourceAsStream("multishop.p12")) {
+            trustStore.load(is, "online".toCharArray());
         }
 
         TrustManagerFactory tmf = TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm());
